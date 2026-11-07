@@ -1,0 +1,124 @@
+{
+  "title": "Elige el mundo visual del estante",
+  "question": "La tirada asignó «Cinta de recopilación». Quédatela, coge una alternativa o vuelve a tirar.",
+  "options": [
+    {
+      "id": "assigned",
+      "kind": "assigned",
+      "label": "Cinta de recopilación",
+      "kicker": "THE ROLL",
+      "lineage": "mixtapes de casete y sus carátulas J-card, 1980-1999",
+      "thesis": "El estante es la cinta que Pedro graba para la comunidad: cada pack es una cara, cada skill una pista con sus notas a mano, y copiar es «grabar» en tu proyecto.",
+      "palette": ["#141210", "#ff5a1f", "#ffc21a", "#2bb3a6", "#e9e4f2"],
+      "materials": ["carátula J-card impresa en bandas diagonales", "carcasa de casete translúcida", "etiqueta escrita a boli y rotulador", "rótulos de Dymo en relieve"],
+      "viewport": "La carátula desplegada a todo ancho: banda diagonal naranja-amarilla, «AFR · Claude Skills» rotulado en la etiqueta de la cinta, y en primer plano las dos caras (Cara A · Pack web, Cara B · Pack backend) con su botón de grabar, que copia el prompt. El listado de pistas asoma debajo.",
+      "risk": "Puede leerse como nostalgia de disfraz si las bandas y la letra a mano decoran en vez de ordenar; tiene que funcionar como índice y como botón.",
+      "raised": [
+        {"from": "challenger-bazaar", "raise": "Cada pista lleva su ticket de procedencia uniforme (autor · licencia · ★ · estado), siempre en el mismo sitio, como la etiqueta de precio de un puesto."},
+        {"from": "challenger-versalles", "raise": "Todo el recorrido cuelga de un solo eje: el lomo de la carátula es la navegación fija y ordena las caras de arriba abajo."},
+        {"from": "challenger-cdrom", "raise": "Los controles tienen recorrido de estado real: grabar, reproducir y pausa se hunden al pulsarlos y quedan marcados mientras están activos."}
+      ]
+    },
+    {
+      "id": "model-pick",
+      "kind": "pick",
+      "label": "Carpeta de cartas y sobres",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "cartas coleccionables y sobres de expansión",
+      "thesis": "Cada skill es una carta con sus estadísticas y cada pack es un sobre que se abre de golpe y te mete las cartas en el proyecto.",
+      "palette": ["#1b1f3a", "#f2c230", "#e8423f", "#3fa7e0", "#f4f1ea"],
+      "materials": ["cartón con borde amarillo", "foil holográfico en las raras", "funda de plástico de carpeta"],
+      "viewport": "Tres sobres cerrados (Web, Backend, Everything) en primer plano; al pulsar uno se abre en abanico con sus cartas y el prompt queda copiado.",
+      "risk": "Es la dirección más evidente para la palabra «pack» y la que más runs elegirían; puede volverse juguete."
+    },
+    {
+      "id": "challenger-doujin",
+      "kind": "challenger",
+      "catalogId": "pop-culture-shelf-doujin-event-catalog",
+      "label": "Catálogo de convención",
+      "verdict": "competitive",
+      "lineage": "catálogos de eventos doujin impresos en papel prensa",
+      "thesis": "Las 38 skills a la vez en una rejilla de sellos numerados, con las elegidas por Pedro rodeadas a boli y un plano de pabellones que es el índice.",
+      "palette": ["#1a1a1a", "#d9d6cc", "#e5322d"],
+      "materials": ["papel prensa a una tinta", "boli rojo", "plano doblado"],
+      "viewport": "La rejilla entera de sellos llena la pantalla; los packs son rutas dibujadas a boli entre casillas.",
+      "case": "Funde bien: descubrir es su punto fuerte y la densidad enseña el estante entero; pierde en identificación del público.",
+      "risk": "Muy denso al primer vistazo; la acción de copiar un pack puede quedar enterrada."
+    },
+    {
+      "id": "challenger-splitflap",
+      "kind": "challenger",
+      "catalogId": "signals-instruments-split-flap-concourse",
+      "label": "Panel de salidas",
+      "verdict": "competitive",
+      "lineage": "paneles de paletas de estación",
+      "thesis": "El estante como panel de salidas: cada skill una fila con su andén (bloque) y su estado; al buscar, las paletas giran.",
+      "palette": ["#111111", "#f4f4f0", "#f2a900", "#c8352b"],
+      "materials": ["paletas negras mate", "marco de acero cepillado", "lámparas ámbar"],
+      "viewport": "El panel ocupa la pantalla con las filas girando; la primera fila es el pack web con su botón de embarcar.",
+      "case": "Funde bien: buscar y filtrar se vuelven el giro de paletas; pierde en identificación con el mundo de los devs.",
+      "risk": "Las demos por skill no caben en una fila; el panel puede ganarle a la explicación."
+    },
+    {
+      "id": "challenger-ansi",
+      "kind": "challenger",
+      "catalogId": "medium-native-ansi-bbs-nightboard",
+      "label": "BBS de madrugada",
+      "verdict": "competitive",
+      "lineage": "BBS de acceso telefónico con pantallas ANSI",
+      "thesis": "El estante es la zona de ficheros del BBS de Pedro: menús numerados, las elegidas del sysop y los packs como descargas.",
+      "palette": ["#000000", "#00aaaa", "#aa00aa", "#ffff55", "#5555ff"],
+      "materials": ["rejilla de caracteres CP437", "arte de bloques ANSI"],
+      "viewport": "Pantalla de título ANSI que entra línea a línea y un menú numerado: [1] Pack web, [2] Pack backend.",
+      "case": "Funde bien y los devs se identifican mucho con ella; pierde en claridad, porque una rejilla de caracteres esconde las demos visuales.",
+      "risk": "Muy cerca del cliché de negro con neón; puede quedarse en disfraz de terminal."
+    },
+    {
+      "id": "challenger-versalles",
+      "kind": "challenger",
+      "catalogId": "architecture-inhabitable-space-versailles-bosquet-vistas",
+      "label": "Jardines de Versalles",
+      "verdict": "declined",
+      "lineage": "jardines de ejes y bosquetes",
+      "palette": ["#3d5a3a", "#d8ccb0", "#b8923a"],
+      "materials": ["seto recortado", "grava rastrillada"],
+      "case": "Funde mal: el público dev no se identifica con un jardín ceremonial y la metáfora oscurece los packs.",
+      "kept": "Un solo eje ordena todo el recorrido."
+    },
+    {
+      "id": "challenger-bazaar",
+      "kind": "challenger",
+      "catalogId": "dream-surreal-impossible-worlds-moon-shadow-bazaar",
+      "label": "Bazar de sombras",
+      "verdict": "declined",
+      "lineage": "bazar nocturno imposible",
+      "palette": ["#141a2b", "#c99a3b", "#e8eef4"],
+      "materials": ["lona de puesto", "tickets de origen"],
+      "case": "Funde mal: precioso pero ajeno; ni el público ni el mecanismo de copiar ganan con él.",
+      "kept": "Cada pieza lleva su ticket de origen uniforme."
+    },
+    {
+      "id": "challenger-cdrom",
+      "kind": "challenger",
+      "catalogId": "digital-design-canon-cdrom-chrome-navigation",
+      "label": "Consola de CD-ROM",
+      "verdict": "declined",
+      "lineage": "interfaces de CD-ROM de los noventa",
+      "palette": ["#8a929c", "#2bb3a6", "#7a5cc4"],
+      "materials": ["paneles biselados", "ventana de vídeo"],
+      "case": "Funde mal: una consola fija con ventanita mata el recorrido por 38 skills.",
+      "kept": "Controles con recorrido de estado real."
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "canon": true,
+  "canonCard": {
+    "kind": "canon",
+    "label": "El estándar de la categoría",
+    "thesis": "Un directorio de herramientas para devs bien hecho: oscuro, buscador arriba, rejilla de tarjetas.",
+    "palette": ["#0b0d12", "#e6e8ee", "#7c5cff"],
+    "materials": ["rejilla limpia", "tarjetas con icono"],
+    "viewport": "Titular centrado, buscador y una rejilla de tarjetas de skills con filtros arriba.",
+    "risk": "Indistinguible de cualquier otro directorio de skills."
+  }
+}

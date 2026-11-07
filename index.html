@@ -4,66 +4,64 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>AFR · Claude Skills</title>
-    <meta name="description" content="Las skills y herramientas para Claude Code que uso: qué hace cada una, de dónde sale y cómo instalarla, con una demo hecha a su manera." />
-    <meta name="theme-color" content="#f3efe6" />
+    <meta name="description" content="Las skills externas que uso con Claude Code, grabadas en una cinta: pulsa REC en un pack o en una pista y pega el prompt en tu proyecto." />
+    <meta name="theme-color" content="#121314" />
     <meta property="og:title" content="AFR · Claude Skills" />
-    <meta property="og:description" content="El estante de skills para Claude Code de Pedro Gómez, con una demo por skill." />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2316140f'/%3E%3Cpath d='M9 24 16 8l7 16M11.5 18.5h9' fill='none' stroke='%23f3efe6' stroke-width='2.6' stroke-linejoin='round'/%3E%3C/svg%3E" />
+    <meta property="og:description" content="La cinta de skills para Claude Code de Pedro Gómez: dos caras, 38 pistas y una demo por skill." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121314'/%3E%3Crect x='4' y='8' width='24' height='16' rx='2' fill='%23ece8f4'/%3E%3Ccircle cx='11' cy='16' r='3' fill='%23121314'/%3E%3Ccircle cx='21' cy='16' r='3' fill='%23121314'/%3E%3Cpath d='M4 21h24v3H4z' fill='%23ff5a1f'/%3E%3C/svg%3E" />
   </head>
   <body>
-    <a class="saltar" href="#bloques">Saltar al catálogo</a>
-    <header class="barra">
-      <a class="marca" href="#arriba" aria-label="AFR · Claude Skills, inicio"><span class="marca-a">A</span> AFR · Claude Skills</a>
-      <nav aria-label="Enlaces">
-        <a href="https://github.com/CODIGOAFRX/AFR-Claude-Skills" target="_blank" rel="noopener noreferrer">Código</a>
-        <a href="https://pedrogomez.dev/">pedrogomez.dev</a>
-      </nav>
-    </header>
+    <a class="saltar" href="#pistas">Saltar a las pistas</a>
 
-    <main id="arriba">
-      <section class="portada" aria-labelledby="titulo">
-        <div class="portada-izq">
-          <p class="portada-k">Lo que uso con Claude Code · revisado el <span id="revisado"></span></p>
-          <h1 id="titulo">El estante<br />de <em>skills</em></h1>
-          <p class="portada-sub">
-            <span id="total"></span> skills y herramientas externas: qué hace cada una, de quién es y cómo instalarla.
-            Cada ficha trae una demo hecha a la manera de su skill. Copia el comando o el prompt y pégalo en Claude Code.
-          </p>
-          <a class="portada-packs" href="#packs">¿Con prisa? Copia el pack web o el de backend <span aria-hidden="true">↓</span></a>
+    <nav class="lomo" aria-label="Lomo de la cinta">
+      <a class="lomo-titulo" href="#cinta">AFR · Claude Skills</a>
+      <ol id="lomo-caras" class="lomo-caras"></ol>
+      <p class="lomo-contador" aria-hidden="true"><span id="contador">000</span></p>
+      <a class="lomo-repo" href="https://github.com/CODIGOAFRX/AFR-Claude-Skills" target="_blank" rel="noopener noreferrer">Código</a>
+    </nav>
+
+    <main>
+      <section class="caratula" id="cinta" aria-labelledby="titulo">
+        <div class="casete">
+          <div class="casete-etiqueta">
+            <h1 id="titulo">AFR · Claude Skills</h1>
+            <p class="casete-linea">Las skills externas que uso con Claude Code. Pulsa REC y pega el prompt en tu proyecto.</p>
+            <p class="casete-ficha" aria-label="Datos de la cinta"><span id="total-pistas"></span> pistas · vol. 1 · revisada el <span id="revisado"></span></p>
+          </div>
+          <div class="casete-ventana" aria-hidden="true">
+            <svg class="bobina" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" class="bobina-cinta"/><circle cx="50" cy="50" r="17" class="bobina-eje"/><path class="bobina-dientes" d="M50 36v-6M50 64v6M36 50h-6M64 50h6M40 40l-4-4M60 60l4 4M60 40l4-4M40 60l-4 4"/></svg>
+            <span class="casete-tramo"></span>
+            <svg class="bobina" viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" class="bobina-cinta"/><circle cx="50" cy="50" r="17" class="bobina-eje"/><path class="bobina-dientes" d="M50 36v-6M50 64v6M36 50h-6M64 50h6M40 40l-4-4M60 60l4 4M60 40l4-4M40 60l-4 4"/></svg>
+          </div>
+          <div class="casete-bandas" aria-hidden="true"><i></i><i></i><i></i></div>
         </div>
-        <div class="portada-der">
-          <label class="buscar"><span>Buscar</span><input id="buscar" type="search" placeholder="scroll, tests, memoria, marca…" autocomplete="off" spellcheck="false" /></label>
-          <div id="filtros" class="filtros" role="group" aria-label="Filtrar por estado"></div>
-          <p id="mostrando" class="mostrando" aria-live="polite"></p>
-          <ol id="indice" class="indice" aria-label="Bloques"></ol>
+
+        <div class="inserto" id="caras">
+          <div id="caras-lista" class="caras"></div>
+          <div id="pirata" class="pirata"></div>
         </div>
+      </section>
+
+      <section class="buscador" id="pistas" aria-label="Buscar en la cinta">
+        <label class="buscar" for="buscar">Buscar en la cinta</label>
+        <input id="buscar" type="search" placeholder="scroll, tests, memoria, marca…" autocomplete="off" spellcheck="false" />
+        <div id="filtros" class="filtros" role="group" aria-label="Filtrar por estado"></div>
+        <p id="mostrando" class="mostrando" aria-live="polite"></p>
       </section>
 
       <div id="bloques"></div>
 
-      <section class="mision" id="mision" aria-labelledby="t-mision">
-        <div>
-          <p class="bloque-num">Extra</p>
-          <h2 id="t-mision">Plantilla de prompt «Misión»</h2>
-          <p class="bloque-lema">No es una skill: es la forma de pedirle a Claude una tarea grande. Cambia lo que va entre corchetes, aquí mismo, y cópialo.</p>
-          <button id="mision-copiar" class="copiar">Copiar la misión</button>
-        </div>
+      <section class="notas" id="notas" aria-labelledby="t-notas">
+        <h2 id="t-notas">Notas de la carátula</h2>
+        <p>No es una skill, es cómo le pido a Claude las tareas grandes. Cambia lo que va entre corchetes, aquí mismo, y grábalo.</p>
         <pre id="mision-texto" class="mision-texto"></pre>
-      </section>
-
-      <section class="packs" id="packs" aria-labelledby="t-packs">
-        <header class="packs-cabeza">
-          <p class="bloque-num">Para llevar</p>
-          <h2 id="t-packs">Copia un pack y empieza</h2>
-          <p class="bloque-lema">Un botón, un prompt. Lo pegas en Claude Code dentro de tu proyecto y te instala lo que toca, sin duplicar nada, te deja el CLAUDE.md al día y te dice cómo arrancar.</p>
-        </header>
-        <div id="packs-lista" class="packs-lista"></div>
+        <button id="mision-copiar" class="rec rec-pequeno" type="button"><span class="rec-piloto" aria-hidden="true"></span>Grabar la misión</button>
       </section>
     </main>
 
     <footer class="pie">
-      <p>Hecho por <a href="https://pedrogomez.dev/">Pedro Gómez</a>. Las descripciones son mías; cada skill pertenece a su autor y tiene su propia licencia. Las demos son ilustrativas.</p>
-      <p><a href="https://github.com/CODIGOAFRX/AFR-Claude-Skills" target="_blank" rel="noopener noreferrer">¿Falta una? El catálogo es un solo archivo: src/data.ts</a></p>
+      <p>Grabada por <a href="https://pedrogomez.dev/">Pedro Gómez</a>. Las notas son mías; cada skill es de su autor y tiene su licencia. Las demos son ilustraciones.</p>
+      <p><a href="https://github.com/CODIGOAFRX/AFR-Claude-Skills" target="_blank" rel="noopener noreferrer">¿Falta una pista? Se añade en src/data.ts</a></p>
     </footer>
     <p id="aviso" class="aviso" role="status" aria-live="polite"></p>
     <script type="module" src="/src/main.ts"></script>

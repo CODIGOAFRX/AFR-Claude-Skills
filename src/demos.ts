@@ -1,46 +1,58 @@
 // Una demo por skill, hecha a la manera de esa skill. Cada función recibe su escena vacía y la monta.
-// Las que van con el scroll leen `progreso(el)`; las que se repiten solo corren mientras se ven.
-// Con movimiento reducido, todas se quedan en su estado final y se manejan a mano.
+// Las que cuentan algo en el tiempo se dejan mover por la cinta de la pletina (`alScroll`); las que se
+// repiten solo corren mientras se ven. Con movimiento reducido, la cinta no avanza sola.
 import { SKILLS } from './data';
 
 export const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-type Demo = (el: HTMLElement) => void;
+type Demo = (el: HTMLElement) => void | Promise<void>;
 
 // ——— Motor común
 
-const scrollers = new Set<{ el: HTMLElement; fn: (p: number) => void; last: number }>();
-let ticking = false;
-function tick() {
-  ticking = false;
-  const vh = innerHeight;
-  for (const s of scrollers) {
-    const r = s.el.getBoundingClientRect();
-    if (r.bottom < -100 || r.top > vh + 100) continue;
-    const p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
-    if (Math.abs(p - s.last) > 0.001) { s.last = p; s.fn(p); }
-  }
-}
-addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(tick); } }, { passive: true });
-addEventListener('resize', () => requestAnimationFrame(tick));
+const cintas = new WeakMap<HTMLElement, (p: number) => void>();
 
-/** Llama a `fn` con el avance de la escena por la pantalla: 0 al asomar por abajo, 1 al salir por arriba. */
+/** Mueve la demo de `el` a la posición `p` de su cinta (0 al principio, 1 al final). */
+export function posicion(el: HTMLElement, p: number) {
+  cintas.get(el)?.(p);
+}
+
+/** ¿Tiene la demo una cinta que la pletina pueda reproducir y arrastrar? */
+export function tieneCinta(el: HTMLElement) {
+  return cintas.has(el);
+}
+
+/** Registra la parte de la demo que avanza con la cinta de la pletina. */
 function alScroll(el: HTMLElement, fn: (p: number) => void) {
-  if (RM) return fn(0.5);
-  scrollers.add({ el, fn, last: -1 });
-  requestAnimationFrame(tick);
+  cintas.set(el, fn);
+  fn(RM ? 1 : 0);
 }
 
-/** Repite `paso` cada `ms` solo mientras la escena está en pantalla. */
+const bucles = new WeakMap<HTMLElement, (pausado: boolean) => void>();
+
+/** Pausa o reanuda la animación en bucle de la demo de `el` (el botón de la pletina). */
+export function pausaBucle(el: HTMLElement, pausado: boolean) {
+  bucles.get(el)?.(pausado);
+}
+
+/** ¿Tiene la demo una animación en bucle que se pueda pausar? */
+export function tieneBucle(el: HTMLElement) {
+  return bucles.has(el);
+}
+
+/** Repite `paso` cada `ms` mientras la escena está en pantalla y nadie la ha pausado. */
 function enBucle(el: HTMLElement, ms: number, paso: (n: number) => void) {
   let n = 0;
   let t = 0;
+  let visible = false;
+  let pausado = false;
   paso(n++);
   if (RM) return;
-  new IntersectionObserver(([e]) => {
+  const sigue = () => {
     clearInterval(t);
-    if (e.isIntersecting) t = window.setInterval(() => paso(n++), ms);
-  }).observe(el);
+    if (visible && !pausado) t = window.setInterval(() => paso(n++), ms);
+  };
+  bucles.set(el, (p) => { pausado = p; sigue(); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; sigue(); }).observe(el);
 }
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -70,10 +82,9 @@ const tasteFrontend: Demo = (el) => {
       <div class="gen-tres"><i>🚀 Rápido</i><i>🔒 Seguro</i><i>⚡ Potente</i></div>
     </div>
     <div class="antes-capa antes-criterio" aria-hidden="true">
-      <p class="cri-kicker">Taller de encuadernación · Granada</p>
+      <p class="cri-kicker">Encuadernación · Granada</p>
       <h4>Libros cosidos<br><em>a mano</em>, uno a uno.</h4>
       <div class="cri-pie"><span>Desde 1987</span><span>Pedidos →</span></div>
-      <div class="cri-lomo"></div>
     </div>
     <div class="antes-linea"><span>Genérico</span><span>Con criterio</span></div>
     <input type="range" min="0" max="100" value="50" aria-label="Comparar diseño genérico y con criterio">`;
@@ -81,7 +92,7 @@ const tasteFrontend: Demo = (el) => {
   let tocado = false;
   const pon = (v: number) => el.style.setProperty('--corte', `${v}%`);
   r.addEventListener('input', () => { tocado = true; pon(+r.value); });
-  alScroll(el, (p) => { if (!tocado) { const v = Math.round(lerp(92, 8, tramo(p, 0.2, 0.75))); r.value = String(v); pon(v); } });
+  alScroll(el, (p) => { if (!tocado) { const v = Math.round(lerp(96, 50, tramo(p, 0.15, 0.8))); r.value = String(v); pon(v); } });
 };
 
 const gptTaste: Demo = async (el) => {
@@ -92,17 +103,16 @@ const gptTaste: Demo = async (el) => {
     ['Deseo', 'Cada carta se apila sobre la anterior.'],
     ['Acción', 'Y al final, una sola llamada.'],
   ];
-  el.innerHTML = `<div class="pila-fija">${cartas.map(([t, d], i) => `<div class="pila-carta" style="--i:${i}"><span>0${i + 1}</span><h4>${t}</h4><p>${d}</p></div>`).join('')}<p class="pila-pista">GSAP ScrollTrigger · pin + scrub</p></div>`;
-  if (RM) return;
-  const [{ gsap }, { ScrollTrigger }] = await Promise.all([import('gsap'), import('gsap/ScrollTrigger')]);
-  gsap.registerPlugin(ScrollTrigger);
+  el.innerHTML = `<div class="pila-fija">${cartas.map(([t, d], i) => `<div class="pila-carta" style="--i:${i}"><span>0${i + 1}</span><h4>${t}</h4><p>${d}</p></div>`).join('')}<p class="pila-pista">GSAP · timeline con scrub</p></div>`;
+  const { gsap } = await import('gsap');
   const cs = gsap.utils.toArray<HTMLElement>(el.querySelectorAll('.pila-carta'));
   gsap.set(cs.slice(1), { yPercent: 170 });
-  const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: 'top top', end: 'bottom bottom', scrub: 0.6 } });
+  const tl = gsap.timeline({ paused: true });
   cs.slice(1).forEach((c, i) => {
     tl.to(c, { yPercent: 0, ease: 'none' }, i);
     tl.to(cs.slice(0, i + 1), { scale: (j: number) => 1 - (i + 1 - j) * 0.05, y: (j: number) => -(i + 1 - j) * 14, ease: 'none' }, i);
   });
+  alScroll(el, (p) => tl.progress(tramo(p, 0.05, 0.9)));
 };
 
 const highEnd: Demo = (el) => {
@@ -222,13 +232,13 @@ const stitch: Demo = (el) => {
   const lineas = [
     ['h', '# DESIGN.md · AFR Claude Skills'],
     ['c', '## Tipografía'],
-    ['t', 'display: Fraunces, 600, -0.02em'],
-    ['t', 'texto: Geist, 400, 1.55'],
+    ['t', 'display: Archivo ancha, 800, mayúsculas'],
+    ['t', 'rotulador: Permanent Marker, solo etiquetas'],
     ['c', '## Color'],
-    ['t', 'papel #f3efe6 · tinta #16140f'],
-    ['t', 'acento #d8452b, solo en llamadas'],
+    ['t', 'negro #121314 · papel #ece8f4'],
+    ['t', 'naranja #ff5a1f, solo en REC'],
     ['c', '## Reglas'],
-    ['t', 'nada de degradados morados'],
+    ['t', 'bandas naranja, amarillo, verde agua'],
     ['t', 'una idea por sección'],
   ];
   el.innerHTML = `<pre class="stitch-doc">${lineas.map(([k, t], i) => `<span class="sl sl-${k}" style="--i:${i}">${t}</span>`).join('\n')}</pre>`;
@@ -274,8 +284,8 @@ const brandkit: Demo = (el) => {
   el.classList.add('d-brand');
   el.innerHTML = `<div class="bk">
     <div class="bk-logo"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="currentColor" stroke-width="3"/><path d="M34 86 60 30l26 56M44 66h32" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"/></svg><p>AFR</p></div>
-    <div class="bk-col"><i style="--c:#16140f"></i><i style="--c:#f3efe6"></i><i style="--c:#d8452b"></i><i style="--c:#7b8c6f"></i></div>
-    <div class="bk-tipo"><p class="bk-aa">Aa</p><p>Fraunces · Geist</p></div>
+    <div class="bk-col"><i style="--c:#121314"></i><i style="--c:#ece8f4"></i><i style="--c:#ff5a1f"></i><i style="--c:#ffc21a"></i></div>
+    <div class="bk-tipo"><p class="bk-aa">Aa</p><p>Archivo · Permanent Marker</p></div>
   </div>`;
 };
 
@@ -323,18 +333,17 @@ const scrollWorld: Demo = (el) => {
     const actual = u > 0.85 ? k + 1 : k;
     pasos.forEach((p, i) => p.classList.toggle('on', i === actual));
   };
-  if (RM) { pon(0); return; }
-  alScroll(el, (p) => pon(tramo(p, 0.3, 0.7)));
+  alScroll(el, (p) => pon(tramo(p, 0.1, 0.9)));
 };
 
 // ——— Sistema de diseño
 
 const PRODUCTOS: Record<string, { estilo: string; fondo: string; tinta: string; acento: string; display: string; texto: string; titulo: string }> = {
-  fintech: { estilo: 'Confianza sobria', fondo: '#0f1a2b', tinta: '#e9eef6', acento: '#3ddc97', display: '"Geist Variable", sans-serif', texto: '"Geist Variable", sans-serif', titulo: 'Tu dinero, sin letra pequeña.' },
-  salud: { estilo: 'Calma clínica', fondo: '#f1f6f4', tinta: '#183a33', acento: '#2a8c74', display: '"Fraunces Variable", serif', texto: '"Geist Variable", sans-serif', titulo: 'Cita con tu médico hoy mismo.' },
-  gaming: { estilo: 'Neón de arcade', fondo: '#120b1f', tinta: '#f4ecff', acento: '#ff3d81', display: '"JetBrains Mono Variable", monospace', texto: '"Geist Variable", sans-serif', titulo: 'Temporada 7: abre el mapa.' },
-  lujo: { estilo: 'Editorial de lujo', fondo: '#f5f0e8', tinta: '#1d1a16', acento: '#9a7b4f', display: '"Fraunces Variable", serif', texto: '"Fraunces Variable", serif', titulo: 'Hecho para durar cien años.' },
-  cafe: { estilo: 'Cálido artesanal', fondo: '#f6ead9', tinta: '#3b2416', acento: '#c2562b', display: '"Fraunces Variable", serif', texto: '"Geist Variable", sans-serif', titulo: 'Tostado el martes, en tu taza el jueves.' },
+  fintech: { estilo: 'Confianza sobria', fondo: '#0f1a2b', tinta: '#e9eef6', acento: '#3ddc97', display: '"Archivo Variable", sans-serif', texto: '"Archivo Variable", sans-serif', titulo: 'Tu dinero, sin letra pequeña.' },
+  salud: { estilo: 'Calma clínica', fondo: '#f1f6f4', tinta: '#183a33', acento: '#2a8c74', display: '"EB Garamond Variable", serif', texto: '"Archivo Variable", sans-serif', titulo: 'Cita con tu médico hoy mismo.' },
+  gaming: { estilo: 'Neón de arcade', fondo: '#120b1f', tinta: '#f4ecff', acento: '#ff3d81', display: '"JetBrains Mono Variable", monospace', texto: '"Archivo Variable", sans-serif', titulo: 'Temporada 7: abre el mapa.' },
+  lujo: { estilo: 'Editorial de lujo', fondo: '#f5f0e8', tinta: '#1d1a16', acento: '#9a7b4f', display: '"EB Garamond Variable", serif', texto: '"EB Garamond Variable", serif', titulo: 'Hecho para durar cien años.' },
+  cafe: { estilo: 'Cálido artesanal', fondo: '#f6ead9', tinta: '#3b2416', acento: '#c2562b', display: '"EB Garamond Variable", serif', texto: '"Archivo Variable", sans-serif', titulo: 'Tostado el martes, en tu taza el jueves.' },
 };
 
 const uiPro: Demo = (el) => {
@@ -371,7 +380,7 @@ const design: Demo = (el) => {
   el.innerHTML = `<div class="logo-escena">
       <svg class="lg lg-0" viewBox="0 0 120 120"><path d="M30 92 60 26l30 66M41 70h38" fill="none" stroke="currentColor" stroke-width="3"/></svg>
       <svg class="lg lg-1" viewBox="0 0 120 120"><path d="M60 18 100 96H20z" fill="currentColor"/><rect x="44" y="70" width="32" height="12" fill="var(--fondo-escena)"/></svg>
-      <svg class="lg lg-2" viewBox="0 0 120 120"><text x="60" y="84" text-anchor="middle" font-family="Fraunces Variable, serif" font-style="italic" font-size="78" fill="currentColor">A</text></svg>
+      <svg class="lg lg-2" viewBox="0 0 120 120"><text x="60" y="84" text-anchor="middle" font-family="EB Garamond Variable, serif" font-style="italic" font-size="78" fill="currentColor">A</text></svg>
       <svg class="lg lg-3" viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" fill="currentColor"/><circle cx="60" cy="60" r="42" fill="none" stroke="var(--fondo-escena)" stroke-width="1.5" stroke-dasharray="3 3"/><text x="60" y="72" text-anchor="middle" font-family="JetBrains Mono Variable, monospace" font-weight="700" font-size="30" fill="var(--fondo-escena)">AFR</text></svg>
     </div>${botones(estilos)}`;
   const escena = el.querySelector<HTMLElement>('.logo-escena')!;
@@ -555,13 +564,19 @@ const findSkills: Demo = (el) => {
   // Teclea sola una búsqueda de ejemplo la primera vez que se ve.
   const ejemplo = 'scroll';
   if (RM) { inp.value = ejemplo; busca(ejemplo); return; }
-  let k = 0;
-  const t = setInterval(() => {
-    if (document.activeElement === inp) return clearInterval(t);
-    inp.value = ejemplo.slice(0, ++k);
-    busca(inp.value);
-    if (k >= ejemplo.length) clearInterval(t);
-  }, 160);
+  // Solo escribe cuando la escena se ve, para no anunciar resultados que nadie ha pedido.
+  const io = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    io.disconnect();
+    let k = 0;
+    const t = setInterval(() => {
+      if (document.activeElement === inp) return clearInterval(t);
+      inp.value = ejemplo.slice(0, ++k);
+      busca(inp.value);
+      if (k >= ejemplo.length) clearInterval(t);
+    }, 160);
+  });
+  io.observe(el);
 };
 
 const untangle: Demo = (el) => {

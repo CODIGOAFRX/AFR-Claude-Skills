@@ -2,3 +2,6 @@ node_modules
 dist
 .wrangler
 .claude/
+.impeccable/review/
+.impeccable/questions/
+.playwright-cli/

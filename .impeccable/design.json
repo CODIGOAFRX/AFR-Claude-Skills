@@ -1,0 +1,715 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-07T11:49:30.005Z",
+  "title": "Design System: AFR · Claude Skills",
+  "extensions": {
+    "colorMeta": {
+      "negro": {
+        "role": "neutral",
+        "displayName": "Negro J-card",
+        "canonical": "#121314",
+        "tonalRamp": [
+          "oklch(15.0% 0.001 0)",
+          "oklch(26.4% 0.002 0)",
+          "oklch(37.9% 0.002 248.0)",
+          "oklch(49.3% 0.002 248.0)",
+          "oklch(60.7% 0.003 248.0)",
+          "oklch(72.1% 0.002 248.0)",
+          "oklch(83.6% 0.002 248.0)",
+          "oklch(95.0% 0.001 0)"
+        ]
+      },
+      "negro-2": {
+        "role": "neutral",
+        "displayName": "Negro tarjeta",
+        "canonical": "#1b1c1f",
+        "tonalRamp": [
+          "oklch(15.0% 0.001 0)",
+          "oklch(26.4% 0.003 271.1)",
+          "oklch(37.9% 0.005 271.1)",
+          "oklch(49.3% 0.006 271.1)",
+          "oklch(60.7% 0.006 271.1)",
+          "oklch(72.1% 0.006 271.1)",
+          "oklch(83.6% 0.005 271.1)",
+          "oklch(95.0% 0.003 271.1)"
+        ]
+      },
+      "negro-3": {
+        "role": "neutral",
+        "displayName": "Negro marco",
+        "canonical": "#26282c",
+        "tonalRamp": [
+          "oklch(15.0% 0.002 0)",
+          "oklch(26.4% 0.005 264.4)",
+          "oklch(37.9% 0.006 264.4)",
+          "oklch(49.3% 0.008 264.4)",
+          "oklch(60.7% 0.008 264.4)",
+          "oklch(72.1% 0.007 264.4)",
+          "oklch(83.6% 0.006 264.4)",
+          "oklch(95.0% 0.004 264.4)"
+        ]
+      },
+      "pozo": {
+        "role": "neutral",
+        "displayName": "Pozo",
+        "canonical": "#0b0b0c",
+        "tonalRamp": [
+          "oklch(15.0% 0.001 0)",
+          "oklch(26.4% 0.001 0)",
+          "oklch(37.9% 0.002 0)",
+          "oklch(49.3% 0.002 286.1)",
+          "oklch(60.7% 0.002 286.1)",
+          "oklch(72.1% 0.002 286.1)",
+          "oklch(83.6% 0.002 0)",
+          "oklch(95.0% 0.001 0)"
+        ]
+      },
+      "blanco": {
+        "role": "neutral",
+        "displayName": "Blanco de cinta",
+        "canonical": "#ecebef",
+        "tonalRamp": [
+          "oklch(15.0% 0.001 0)",
+          "oklch(26.4% 0.003 297.7)",
+          "oklch(37.9% 0.004 297.7)",
+          "oklch(49.3% 0.005 297.7)",
+          "oklch(60.7% 0.005 297.7)",
+          "oklch(72.1% 0.005 297.7)",
+          "oklch(83.6% 0.004 297.7)",
+          "oklch(95.0% 0.003 297.7)"
+        ]
+      },
+      "gris": {
+        "role": "neutral",
+        "displayName": "Gris de carátula",
+        "canonical": "#a9a7b2",
+        "tonalRamp": [
+          "oklch(15.0% 0.004 294.4)",
+          "oklch(26.4% 0.009 294.4)",
+          "oklch(37.9% 0.013 294.4)",
+          "oklch(49.3% 0.015 294.4)",
+          "oklch(60.7% 0.016 294.4)",
+          "oklch(72.1% 0.015 294.4)",
+          "oklch(83.6% 0.013 294.4)",
+          "oklch(95.0% 0.009 294.4)"
+        ]
+      },
+      "naranja": {
+        "role": "primary",
+        "displayName": "Banda naranja",
+        "canonical": "#ff5a1f",
+        "tonalRamp": [
+          "oklch(15.0% 0.053 37.7)",
+          "oklch(26.4% 0.123 37.7)",
+          "oklch(37.9% 0.172 37.7)",
+          "oklch(49.3% 0.202 37.7)",
+          "oklch(60.7% 0.211 37.7)",
+          "oklch(72.1% 0.199 37.7)",
+          "oklch(83.6% 0.167 37.7)",
+          "oklch(95.0% 0.115 37.7)"
+        ]
+      },
+      "naranja-labio": {
+        "role": "primary",
+        "displayName": "Labio naranja",
+        "canonical": "#a3360f",
+        "tonalRamp": [
+          "oklch(15.0% 0.038 37.6)",
+          "oklch(26.4% 0.088 37.6)",
+          "oklch(37.9% 0.124 37.6)",
+          "oklch(49.3% 0.145 37.6)",
+          "oklch(60.7% 0.151 37.6)",
+          "oklch(72.1% 0.143 37.6)",
+          "oklch(83.6% 0.120 37.6)",
+          "oklch(95.0% 0.083 37.6)"
+        ]
+      },
+      "amarillo": {
+        "role": "secondary",
+        "displayName": "Banda amarilla",
+        "canonical": "#ffc21a",
+        "tonalRamp": [
+          "oklch(15.0% 0.042 84.9)",
+          "oklch(26.4% 0.099 84.9)",
+          "oklch(37.9% 0.139 84.9)",
+          "oklch(49.3% 0.162 84.9)",
+          "oklch(60.7% 0.169 84.9)",
+          "oklch(72.1% 0.160 84.9)",
+          "oklch(83.6% 0.134 84.9)",
+          "oklch(95.0% 0.093 84.9)"
+        ]
+      },
+      "agua": {
+        "role": "tertiary",
+        "displayName": "Banda agua",
+        "canonical": "#2bb3a6",
+        "tonalRamp": [
+          "oklch(15.0% 0.028 185.2)",
+          "oklch(26.4% 0.066 185.2)",
+          "oklch(37.9% 0.092 185.2)",
+          "oklch(49.3% 0.108 185.2)",
+          "oklch(60.7% 0.113 185.2)",
+          "oklch(72.1% 0.107 185.2)",
+          "oklch(83.6% 0.090 185.2)",
+          "oklch(95.0% 0.062 185.2)"
+        ]
+      },
+      "piloto": {
+        "role": "primary",
+        "displayName": "Piloto rojo",
+        "canonical": "#e5322d",
+        "tonalRamp": [
+          "oklch(15.0% 0.054 27.7)",
+          "oklch(26.4% 0.125 27.7)",
+          "oklch(37.9% 0.176 27.7)",
+          "oklch(49.3% 0.206 27.7)",
+          "oklch(60.7% 0.215 27.7)",
+          "oklch(72.1% 0.203 27.7)",
+          "oklch(83.6% 0.171 27.7)",
+          "oklch(95.0% 0.117 27.7)"
+        ]
+      },
+      "piloto-apagado": {
+        "role": "primary",
+        "displayName": "Piloto apagado",
+        "canonical": "#5a1410",
+        "tonalRamp": [
+          "oklch(15.0% 0.026 27.9)",
+          "oklch(26.4% 0.060 27.9)",
+          "oklch(37.9% 0.084 27.9)",
+          "oklch(49.3% 0.098 27.9)",
+          "oklch(60.7% 0.102 27.9)",
+          "oklch(72.1% 0.097 27.9)",
+          "oklch(83.6% 0.081 27.9)",
+          "oklch(95.0% 0.056 27.9)"
+        ]
+      },
+      "papel": {
+        "role": "neutral",
+        "displayName": "Papel lila",
+        "canonical": "#ece8f4",
+        "tonalRamp": [
+          "oklch(15.0% 0.004 301.2)",
+          "oklch(26.4% 0.010 301.2)",
+          "oklch(37.9% 0.014 301.2)",
+          "oklch(49.3% 0.016 301.2)",
+          "oklch(60.7% 0.017 301.2)",
+          "oklch(72.1% 0.016 301.2)",
+          "oklch(83.6% 0.013 301.2)",
+          "oklch(95.0% 0.009 301.2)"
+        ]
+      },
+      "boli": {
+        "role": "neutral",
+        "displayName": "Boli",
+        "canonical": "#2a3b8f",
+        "tonalRamp": [
+          "oklch(15.0% 0.035 270.0)",
+          "oklch(26.4% 0.082 270.0)",
+          "oklch(37.9% 0.115 270.0)",
+          "oklch(49.3% 0.134 270.0)",
+          "oklch(60.7% 0.140 270.0)",
+          "oklch(72.1% 0.132 270.0)",
+          "oklch(83.6% 0.111 270.0)",
+          "oklch(95.0% 0.076 270.0)"
+        ]
+      },
+      "tinta-papel": {
+        "role": "neutral",
+        "displayName": "Tinta de papel",
+        "canonical": "#19172a",
+        "tonalRamp": [
+          "oklch(15.0% 0.009 287.7)",
+          "oklch(26.4% 0.021 287.7)",
+          "oklch(37.9% 0.030 287.7)",
+          "oklch(49.3% 0.035 287.7)",
+          "oklch(60.7% 0.037 287.7)",
+          "oklch(72.1% 0.035 287.7)",
+          "oklch(83.6% 0.029 287.7)",
+          "oklch(95.0% 0.020 287.7)"
+        ]
+      },
+      "tinta-papel-suave": {
+        "role": "neutral",
+        "displayName": "Tinta suave",
+        "canonical": "#545068",
+        "tonalRamp": [
+          "oklch(15.0% 0.010 292.4)",
+          "oklch(26.4% 0.023 292.4)",
+          "oklch(37.9% 0.032 292.4)",
+          "oklch(49.3% 0.038 292.4)",
+          "oklch(60.7% 0.039 292.4)",
+          "oklch(72.1% 0.037 292.4)",
+          "oklch(83.6% 0.031 292.4)",
+          "oklch(95.0% 0.021 292.4)"
+        ]
+      },
+      "hueco": {
+        "role": "neutral",
+        "displayName": "Hueco",
+        "canonical": "#a8350a",
+        "tonalRamp": [
+          "oklch(15.0% 0.039 37.5)",
+          "oklch(26.4% 0.092 37.5)",
+          "oklch(37.9% 0.129 37.5)",
+          "oklch(49.3% 0.151 37.5)",
+          "oklch(60.7% 0.158 37.5)",
+          "oklch(72.1% 0.149 37.5)",
+          "oklch(83.6% 0.125 37.5)",
+          "oklch(95.0% 0.086 37.5)"
+        ]
+      },
+      "cinta": {
+        "role": "neutral",
+        "displayName": "Óxido de cinta",
+        "canonical": "#8a5a3c",
+        "tonalRamp": [
+          "oklch(15.0% 0.019 52.3)",
+          "oklch(26.4% 0.045 52.3)",
+          "oklch(37.9% 0.063 52.3)",
+          "oklch(49.3% 0.074 52.3)",
+          "oklch(60.7% 0.077 52.3)",
+          "oklch(72.1% 0.073 52.3)",
+          "oklch(83.6% 0.061 52.3)",
+          "oklch(95.0% 0.042 52.3)"
+        ]
+      },
+      "ojo-fondo": {
+        "role": "neutral",
+        "displayName": "Ojo, fondo",
+        "canonical": "#2a2414",
+        "tonalRamp": [
+          "oklch(15.0% 0.007 89.7)",
+          "oklch(26.4% 0.017 89.7)",
+          "oklch(37.9% 0.023 89.7)",
+          "oklch(49.3% 0.027 89.7)",
+          "oklch(60.7% 0.029 89.7)",
+          "oklch(72.1% 0.027 89.7)",
+          "oklch(83.6% 0.023 89.7)",
+          "oklch(95.0% 0.016 89.7)"
+        ]
+      },
+      "ojo-tinta": {
+        "role": "neutral",
+        "displayName": "Ojo, tinta",
+        "canonical": "#e4d9b8",
+        "tonalRamp": [
+          "oklch(15.0% 0.011 91.8)",
+          "oklch(26.4% 0.026 91.8)",
+          "oklch(37.9% 0.037 91.8)",
+          "oklch(49.3% 0.043 91.8)",
+          "oklch(60.7% 0.045 91.8)",
+          "oklch(72.1% 0.043 91.8)",
+          "oklch(83.6% 0.036 91.8)",
+          "oklch(95.0% 0.025 91.8)"
+        ]
+      },
+      "dymo-global": {
+        "role": "state",
+        "displayName": "Dymo Global",
+        "canonical": "#1f7a4d",
+        "tonalRamp": [
+          "oklch(15.0% 0.028 156.8)",
+          "oklch(26.4% 0.064 156.8)",
+          "oklch(37.9% 0.090 156.8)",
+          "oklch(49.3% 0.106 156.8)",
+          "oklch(60.7% 0.110 156.8)",
+          "oklch(72.1% 0.104 156.8)",
+          "oklch(83.6% 0.088 156.8)",
+          "oklch(95.0% 0.060 156.8)"
+        ]
+      },
+      "dymo-proyecto": {
+        "role": "state",
+        "displayName": "Dymo Por proyecto",
+        "canonical": "#1d4fa8",
+        "tonalRamp": [
+          "oklch(15.0% 0.038 260.9)",
+          "oklch(26.4% 0.089 260.9)",
+          "oklch(37.9% 0.125 260.9)",
+          "oklch(49.3% 0.147 260.9)",
+          "oklch(60.7% 0.153 260.9)",
+          "oklch(72.1% 0.145 260.9)",
+          "oklch(83.6% 0.122 260.9)",
+          "oklch(95.0% 0.084 260.9)"
+        ]
+      },
+      "dymo-opcional": {
+        "role": "state",
+        "displayName": "Dymo Opcional",
+        "canonical": "#a84c0c",
+        "tonalRamp": [
+          "oklch(15.0% 0.035 47.9)",
+          "oklch(26.4% 0.081 47.9)",
+          "oklch(37.9% 0.113 47.9)",
+          "oklch(49.3% 0.132 47.9)",
+          "oklch(60.7% 0.138 47.9)",
+          "oklch(72.1% 0.131 47.9)",
+          "oklch(83.6% 0.110 47.9)",
+          "oklch(95.0% 0.076 47.9)"
+        ]
+      },
+      "dymo-ideas": {
+        "role": "state",
+        "displayName": "Dymo Solo ideas",
+        "canonical": "#6b3fa0",
+        "tonalRamp": [
+          "oklch(15.0% 0.038 301.7)",
+          "oklch(26.4% 0.089 301.7)",
+          "oklch(37.9% 0.125 301.7)",
+          "oklch(49.3% 0.146 301.7)",
+          "oklch(60.7% 0.152 301.7)",
+          "oklch(72.1% 0.144 301.7)",
+          "oklch(83.6% 0.121 301.7)",
+          "oklch(95.0% 0.083 301.7)"
+        ]
+      },
+      "dymo-radar": {
+        "role": "state",
+        "displayName": "Dymo En el radar",
+        "canonical": "#45474e",
+        "tonalRamp": [
+          "oklch(15.0% 0.003 273.1)",
+          "oklch(26.4% 0.007 273.1)",
+          "oklch(37.9% 0.010 273.1)",
+          "oklch(49.3% 0.012 273.1)",
+          "oklch(60.7% 0.012 273.1)",
+          "oklch(72.1% 0.011 273.1)",
+          "oklch(83.6% 0.010 273.1)",
+          "oklch(95.0% 0.007 273.1)"
+        ]
+      },
+      "escena": {
+        "role": "neutral",
+        "displayName": "Escena (demo stage)",
+        "canonical": "#e9e6ef",
+        "tonalRamp": [
+          "oklch(15.0% 0.003 301.3)",
+          "oklch(26.4% 0.007 301.3)",
+          "oklch(37.9% 0.010 301.3)",
+          "oklch(49.3% 0.012 301.3)",
+          "oklch(60.7% 0.012 301.3)",
+          "oklch(72.1% 0.012 301.3)",
+          "oklch(83.6% 0.010 301.3)",
+          "oklch(95.0% 0.007 301.3)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Rotulador (display)",
+        "purpose": "Cassette title only, boli on paper, rotated -1.2deg."
+      },
+      "notes": {
+        "displayName": "Rotulador (notas)",
+        "purpose": "Liner-notes title in amarillo on black; at 22px names the track on the deck label."
+      },
+      "headline": {
+        "displayName": "Archivo ancho (headline)",
+        "purpose": "Block headings, uppercase, width 125% via font-stretch."
+      },
+      "title": {
+        "displayName": "Archivo ancho (title)",
+        "purpose": "Side card and bootleg headings, uppercase, width 118%."
+      },
+      "track": {
+        "displayName": "Pista",
+        "purpose": "Track names in the tracklist, width 106%."
+      },
+      "lead": {
+        "displayName": "Línea impresa",
+        "purpose": "The printed line under the cassette title."
+      },
+      "body": {
+        "displayName": "Texto",
+        "purpose": "All running text."
+      },
+      "label-wide": {
+        "displayName": "Ficha ancha",
+        "purpose": "Cassette spec line and search label, uppercase, wide."
+      },
+      "label-narrow": {
+        "displayName": "Cinta estrecha",
+        "purpose": "Spine index, Dymo labels and filters, disclosure summaries, width 75%."
+      },
+      "biro": {
+        "displayName": "Boli",
+        "purpose": "Handwritten margin notes, Cuándo/Ojo lead words, bootleg strip, empty stage."
+      },
+      "mono": {
+        "displayName": "Medidas",
+        "purpose": "Track numbers, counter, counts and repo slugs, tabular figures."
+      },
+      "code": {
+        "displayName": "Código",
+        "purpose": "Prompt previews; the mission template runs at 15px/1.9."
+      }
+    },
+    "shadows": [
+      {
+        "name": "objeto-casete",
+        "value": "0 1px 0 #ffffff80 inset, 0 18px 40px -18px #000",
+        "purpose": "Paper cassette lying on the J-card."
+      },
+      {
+        "name": "objeto-pletina",
+        "value": "0 1px 0 #ffffff12 inset, 0 20px 40px -24px #000",
+        "purpose": "Deck body."
+      },
+      {
+        "name": "tecla-rec",
+        "value": "0 3px 0 #a3360f, 0 6px 14px -6px #000",
+        "purpose": "Key travel lip of the orange REC key at rest; lip is #77757f on small keys and #000 on bootleg and play keys."
+      },
+      {
+        "name": "tecla-pulsada",
+        "value": "0 0 0 #a3360f, 0 2px 6px -4px #000",
+        "purpose": "Pressed or recording key, paired with translateY(3px)."
+      },
+      {
+        "name": "pozo",
+        "value": "inset 0 1px 3px #000c",
+        "purpose": "Recessed spine counter window."
+      },
+      {
+        "name": "ventana",
+        "value": "inset 0 2px 8px #000",
+        "purpose": "Cassette reel window."
+      },
+      {
+        "name": "piloto-encendido",
+        "value": "0 0 0 3px #e5322d40, 0 0 12px #e5322d",
+        "purpose": "The only glow: a lit record pilot."
+      },
+      {
+        "name": "aviso",
+        "value": "0 10px 30px -10px #000",
+        "purpose": "Paper toast."
+      },
+      {
+        "name": "etiqueta-bandas",
+        "value": "inset 0 -6px 0 #2bb3a6, inset 0 -12px 0 #ffc21a",
+        "purpose": "Yellow and teal stripes at the foot of the deck label."
+      }
+    ],
+    "motion": [
+      {
+        "name": "tecla",
+        "value": "transform 0.08s, box-shadow 0.08s",
+        "purpose": "REC and play keys sink 3px as the lip collapses."
+      },
+      {
+        "name": "tecla-cara",
+        "value": "background 0.2s",
+        "purpose": "REC key face lightening on hover."
+      },
+      {
+        "name": "parpadea",
+        "value": "0.4s steps(2) 3",
+        "purpose": "Record pilot blink, on REC key and spine counter."
+      },
+      {
+        "name": "rebobina",
+        "value": "0.5s linear infinite",
+        "purpose": "Cassette reels spin fast while a copy is recording."
+      },
+      {
+        "name": "giro-scroll",
+        "value": "rotate: scrollY * 0.4deg",
+        "purpose": "Reels rotate with page scroll (skipped under reduced motion)."
+      },
+      {
+        "name": "contador",
+        "value": "round(scrollProgress * 999), 3 digits",
+        "purpose": "Spine tape counter tracks scroll progress."
+      },
+      {
+        "name": "cinta-pletina",
+        "value": "6000ms linear",
+        "purpose": "Tape-mode demo playback; scrubbable 0–1000."
+      },
+      {
+        "name": "aviso",
+        "value": "opacity 0.25s, translate 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); dwell 1600ms",
+        "purpose": "Toast rises 20px and fades in; recording state clears with it."
+      },
+      {
+        "name": "despliegue",
+        "value": "rotate 0.2s",
+        "purpose": "Disclosure triangle."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation: none !important; transition: none !important",
+        "purpose": "Global kill; reels static, no deck auto-play, tape demos on final frame, loops paused, smooth scroll off."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "movil-pista",
+        "value": "599px"
+      },
+      {
+        "name": "movil-casete",
+        "value": "699px"
+      },
+      {
+        "name": "lomo-arriba",
+        "value": "899px"
+      },
+      {
+        "name": "dos-columnas",
+        "value": "1000px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "REC grande (pack side)",
+      "kind": "button",
+      "refersTo": "rec-grande",
+      "description": "Record key on Cara A and Cara B: copies the pack prompt; sinks, lights and blinks its pilot.",
+      "html": "<button class=\"ds-rec ds-rec-grande\" type=\"button\"><span class=\"ds-rec-piloto\" aria-hidden=\"true\"></span>Grabar pack web</button>",
+      "css": ".ds-rec { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 10px 18px 10px 14px; border: 0; border-radius: 6px; background: var(--naranja, #ff5a1f); color: #1a0d05; font: 800 16px/1.2 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-stretch: 112%; white-space: nowrap; cursor: pointer; box-shadow: 0 3px 0 var(--naranja-labio, #a3360f), 0 6px 14px -6px #000; transition: transform 0.08s, box-shadow 0.08s, background 0.2s; } .ds-rec-grande { min-height: 52px; font-size: 17px; padding-inline: 16px 22px; } .ds-rec:hover { background: #ff7140; } .ds-rec:active { transform: translateY(3px); box-shadow: 0 0 0 var(--naranja-labio, #a3360f), 0 2px 6px -4px #000; } .ds-rec:active .ds-rec-piloto { background: var(--piloto, #e5322d); box-shadow: 0 0 0 3px #e5322d40, 0 0 12px var(--piloto, #e5322d); } .ds-rec:focus-visible { outline: 2px solid var(--amarillo, #ffc21a); outline-offset: 3px; } .ds-rec-piloto { width: 12px; height: 12px; border-radius: 50%; background: var(--piloto-apagado, #5a1410); box-shadow: inset 0 1px 2px #0008; flex: none; }"
+    },
+    {
+      "name": "REC pequeño (track key)",
+      "kind": "button",
+      "refersTo": "rec-pequeno",
+      "description": "White record key for a track command or prompt, a whole block pack and the mission.",
+      "html": "<button class=\"ds-rec-p\" type=\"button\"><span class=\"ds-rec-p-piloto\" aria-hidden=\"true\"></span>Grabar comando</button>",
+      "css": ".ds-rec-p { display: inline-flex; align-items: center; gap: 10px; min-height: 38px; padding: 8px 14px 8px 11px; border: 0; border-radius: 6px; background: var(--blanco, #ecebef); color: var(--negro, #121314); font: 800 14px/1.2 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-stretch: 112%; cursor: pointer; box-shadow: 0 3px 0 #77757f, 0 6px 14px -8px #000; transition: transform 0.08s, box-shadow 0.08s, background 0.2s; } .ds-rec-p:hover { background: #fff; } .ds-rec-p:active { transform: translateY(3px); box-shadow: 0 0 0 #77757f; } .ds-rec-p:focus-visible { outline: 2px solid var(--amarillo, #ffc21a); outline-offset: 3px; } .ds-rec-p-piloto { width: 12px; height: 12px; border-radius: 50%; background: var(--piloto-apagado, #5a1410); box-shadow: inset 0 1px 2px #0008; } .ds-rec-p:active .ds-rec-p-piloto { background: var(--piloto, #e5322d); box-shadow: 0 0 12px var(--piloto, #e5322d); }"
+    },
+    {
+      "name": "Dymo state labels and filter",
+      "kind": "chip",
+      "refersTo": "dymo-global",
+      "description": "Embossed-tape state labels, one fixed colour per state; filters are the same tape as toggle buttons.",
+      "html": "<div class=\"ds-dymos\"><span class=\"ds-dymo\" style=\"background:#1f7a4d\">Global</span><span class=\"ds-dymo\" style=\"background:#1d4fa8\">Por proyecto</span><span class=\"ds-dymo\" style=\"background:#a84c0c\">Opcional</span><span class=\"ds-dymo\" style=\"background:#6b3fa0\">Solo ideas</span><span class=\"ds-dymo\" style=\"background:#45474e\">En el radar</span><button class=\"ds-dymo ds-dymo-filtro\" aria-pressed=\"true\" type=\"button\">Todas <span>38</span></button></div>",
+      "css": ".ds-dymos { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px; background: var(--negro, #121314); } .ds-dymo { display: inline-flex; align-items: center; gap: 6px; padding: 4px 9px; border: 0; border-radius: 3px; color: #fff; font: 800 12px/1.3 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-stretch: 75%; letter-spacing: 0.16em; text-transform: uppercase; white-space: nowrap; } .ds-dymo-filtro { min-height: 36px; font-size: 13px; background: var(--negro-3, #26282c); cursor: pointer; } .ds-dymo-filtro span { font: 600 12px 'JetBrains Mono Variable', ui-monospace, monospace; letter-spacing: 0; } .ds-dymo-filtro[aria-pressed='true'] { outline: 2px solid var(--amarillo, #ffc21a); outline-offset: 2px; text-decoration: underline 2px; text-underline-offset: 4px; } .ds-dymo-filtro:hover { filter: brightness(1.15); } .ds-dymo-filtro:focus-visible { outline: 2px solid var(--amarillo, #ffc21a); outline-offset: 3px; }"
+    },
+    {
+      "name": "Track row (pista)",
+      "kind": "custom",
+      "refersTo": "pista-boton",
+      "description": "Numbered tracklist row with provenance ticket and Dymo state; the active row turns its number into a yellow chip.",
+      "html": "<ol class=\"ds-pistas\"><li><button class=\"ds-pista\" type=\"button\" aria-expanded=\"false\"><span class=\"ds-pista-num\">03</span><span class=\"ds-pista-nombre\">ui-ux-pro-max</span><span class=\"ds-pista-ticket\"><span>nextlevelbuilder</span><span>MIT</span></span><span class=\"ds-pista-dymo\">Global</span></button></li><li><button class=\"ds-pista ds-activa\" type=\"button\" aria-expanded=\"true\"><span class=\"ds-pista-num\">04</span><span class=\"ds-pista-nombre\">impeccable</span><span class=\"ds-pista-ticket\"><span>pbakaus</span><span>Apache-2.0</span></span><span class=\"ds-pista-dymo\" style=\"background:#1d4fa8\">Por proyecto</span></button></li></ol>",
+      "css": ".ds-pistas { list-style: none; margin: 0; padding: 8px; background: var(--negro, #121314); color: var(--blanco, #ecebef); } .ds-pistas li { border-bottom: 1px solid var(--negro-3, #26282c); } .ds-pista { width: 100%; display: grid; grid-template-columns: 2.6em minmax(0, 1fr) auto; grid-template-areas: 'num nombre estado' 'num ticket estado'; column-gap: 12px; row-gap: 2px; align-items: center; padding: 12px 6px; border: 0; background: none; color: inherit; text-align: left; border-radius: 6px; cursor: pointer; font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; } .ds-pista:hover { background: var(--negro-2, #1b1c1f); } .ds-pista:focus-visible { outline: 2px solid var(--amarillo, #ffc21a); outline-offset: 3px; } .ds-pista-num { grid-area: num; align-self: start; padding: 3px 0; font: 600 14px/1.4 'JetBrains Mono Variable', ui-monospace, monospace; font-variant-numeric: tabular-nums; color: var(--gris, #a9a7b2); text-align: center; border-radius: 3px; } .ds-pista-nombre { grid-area: nombre; font: 700 18px/1.25 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-stretch: 106%; } .ds-pista-ticket { grid-area: ticket; display: flex; gap: 0 10px; font-size: 13px; color: var(--gris, #a9a7b2); } .ds-pista-dymo { grid-area: estado; padding: 4px 9px; border-radius: 3px; background: #1f7a4d; color: #fff; font: 800 12px/1.3 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-stretch: 75%; letter-spacing: 0.16em; text-transform: uppercase; } .ds-activa .ds-pista-num { background: var(--amarillo, #ffc21a); color: var(--negro, #121314); } .ds-activa .ds-pista-nombre { color: var(--amarillo, #ffc21a); }"
+    },
+    {
+      "name": "Pletina (deck with transport)",
+      "kind": "card",
+      "refersTo": "pletina",
+      "description": "Per-block tape deck: paper label with marker track name, demo stage, play key with key travel and a tape scrub bar.",
+      "html": "<section class=\"ds-pletina\" aria-label=\"Pletina\"><p class=\"ds-pletina-etiqueta\"><span class=\"ds-pletina-num\">04</span><span class=\"ds-pletina-nombre\">impeccable</span></p><div class=\"ds-escena\"></div><div class=\"ds-mandos\"><button class=\"ds-play\" type=\"button\" aria-label=\"Reproducir\"><svg viewBox=\"0 0 16 16\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path d=\"M4 2.5v11l9-5.5z\" fill=\"currentColor\"/></svg></button><input class=\"ds-cinta\" type=\"range\" min=\"0\" max=\"1000\" value=\"420\" aria-label=\"Posición de la cinta\" style=\"--p:42%\" /><span class=\"ds-pie\">Arrastra la cinta o dale al play</span></div></section>",
+      "css": ".ds-pletina { display: grid; max-width: 520px; border-radius: 10px; background: var(--negro-2, #1b1c1f); box-shadow: 0 1px 0 #ffffff12 inset, 0 20px 40px -24px #000; overflow: hidden; } .ds-pletina-etiqueta { display: flex; align-items: baseline; gap: 10px; margin: 12px 12px 0; padding: 8px 14px 18px; border-radius: 6px; background: var(--papel, #ece8f4); box-shadow: inset 0 -6px 0 var(--agua, #2bb3a6), inset 0 -12px 0 var(--amarillo, #ffc21a); } .ds-pletina-num { font: 600 13px 'JetBrains Mono Variable', ui-monospace, monospace; color: var(--tinta-papel-suave, #545068); } .ds-pletina-nombre { font: 400 22px/1.1 'Permanent Marker', 'Archivo Variable', cursive; color: var(--boli, #2a3b8f); } .ds-escena { margin: 12px; min-height: 180px; border-radius: 6px; background: var(--escena, #e9e6ef); } .ds-mandos { display: flex; align-items: center; gap: 12px; padding: 0 14px 14px; } .ds-play { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 6px; background: var(--negro-3, #26282c); color: var(--blanco, #ecebef); cursor: pointer; box-shadow: 0 3px 0 #000, 0 6px 14px -6px #000; transition: transform 0.08s, box-shadow 0.08s; } .ds-play:active { transform: translateY(3px); box-shadow: 0 0 0 #000; color: var(--amarillo, #ffc21a); } .ds-play:focus-visible { outline: 2px solid var(--amarillo, #ffc21a); outline-offset: 3px; } .ds-cinta { flex: 1; min-width: 0; height: 26px; margin: 0; appearance: none; background: transparent; cursor: ew-resize; } .ds-cinta::-webkit-slider-runnable-track { height: 10px; border-radius: 5px; background: linear-gradient(90deg, var(--cinta, #8a5a3c) var(--p), #34363b var(--p)); } .ds-cinta::-moz-range-track { height: 10px; border-radius: 5px; background: linear-gradient(90deg, var(--cinta, #8a5a3c) var(--p), #34363b var(--p)); } .ds-cinta::-webkit-slider-thumb { appearance: none; width: 18px; height: 26px; margin-top: -8px; border-radius: 4px; background: var(--amarillo, #ffc21a); box-shadow: 0 2px 4px #0008; } .ds-cinta::-moz-range-thumb { width: 18px; height: 26px; border: 0; border-radius: 4px; background: var(--amarillo, #ffc21a); } .ds-cinta:focus-visible { outline: 2px solid var(--amarillo, #ffc21a); outline-offset: 3px; } .ds-pie { flex: none; font: 13px 'Archivo Variable', 'Archivo', system-ui, sans-serif; color: var(--gris, #a9a7b2); }"
+    },
+    {
+      "name": "Casete (cassette label)",
+      "kind": "card",
+      "refersTo": "casete",
+      "description": "Hero object: paper label with marker title, printed lines, reel window and the three bands crossing the foot.",
+      "html": "<div class=\"ds-casete\"><div class=\"ds-casete-etiqueta\"><h1 class=\"ds-casete-titulo\">AFR · Claude Skills</h1><p class=\"ds-casete-linea\">Las skills externas que uso con Claude Code.</p><p class=\"ds-casete-ficha\">38 pistas · vol. 1</p></div><div class=\"ds-ventana\" aria-hidden=\"true\"><i></i><b></b><i></i></div><div class=\"ds-bandas\" aria-hidden=\"true\"><i></i><i></i><i></i></div></div>",
+      "css": ".ds-casete { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 24px; padding: 24px 28px 0; border-radius: 10px; background: var(--papel, #ece8f4); color: var(--tinta-papel, #19172a); box-shadow: 0 1px 0 #ffffff80 inset, 0 18px 40px -18px #000; overflow: hidden; } .ds-casete::after { content: ''; position: absolute; inset: 8px; border: 1px solid #19172a24; border-radius: 6px; pointer-events: none; } .ds-casete-etiqueta { display: grid; gap: 10px; padding-bottom: 18px; } .ds-casete-titulo { margin: 0; font: 400 52px/1 'Permanent Marker', 'Archivo Variable', cursive; color: var(--boli, #2a3b8f); rotate: -1.2deg; transform-origin: left; } .ds-casete-linea { margin: 0; font: 500 17px/1.55 'Archivo Variable', 'Archivo', system-ui, sans-serif; color: #2d2a40; } .ds-casete-ficha { margin: 0; font: 700 12px/1.3 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-stretch: 125%; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tinta-papel-suave, #545068); } .ds-ventana { align-self: center; display: flex; align-items: center; margin-bottom: 18px; padding: 12px 16px; border-radius: 40px; background: var(--tinta-papel, #19172a); box-shadow: inset 0 2px 8px #000; } .ds-ventana i { width: 56px; height: 56px; border-radius: 50%; background: radial-gradient(var(--papel, #ece8f4) 0 30%, #5a3a28 31%); } .ds-ventana b { width: 36px; height: 16px; background: #3c281c; box-shadow: inset 0 0 0 4px var(--tinta-papel, #19172a); } .ds-bandas { grid-column: 1 / -1; display: grid; margin: 6px -6% -10px; rotate: -3deg; transform-origin: 30% 50%; } .ds-bandas i { display: block; height: 18px; } .ds-bandas i:nth-child(1) { background: var(--naranja, #ff5a1f); } .ds-bandas i:nth-child(2) { background: var(--amarillo, #ffc21a); } .ds-bandas i:nth-child(3) { background: var(--agua, #2bb3a6); }"
+    },
+    {
+      "name": "Buscador (search field)",
+      "kind": "input",
+      "refersTo": "buscar",
+      "description": "Wide-caps label and a dark 48px field with a yellow caret and yellow focus outline.",
+      "html": "<div class=\"ds-buscador\"><label class=\"ds-buscar-label\" for=\"ds-buscar\">Buscar en la cinta</label><input id=\"ds-buscar\" class=\"ds-buscar\" type=\"search\" placeholder=\"scroll, tests, memoria, marca…\" /></div>",
+      "css": ".ds-buscador { display: grid; gap: 8px; padding: 12px; background: var(--negro, #121314); } .ds-buscar-label { font: 700 13px 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-stretch: 118%; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gris, #a9a7b2); } .ds-buscar { min-height: 48px; padding: 0 16px; border: 1px solid var(--negro-3, #26282c); border-radius: 6px; background: var(--negro-2, #1b1c1f); color: var(--blanco, #ecebef); font: 500 17px 'Archivo Variable', 'Archivo', system-ui, sans-serif; caret-color: var(--amarillo, #ffc21a); } .ds-buscar::placeholder { color: #8e8c97; } .ds-buscar:focus { outline: 2px solid var(--amarillo, #ffc21a); outline-offset: 0; border-color: transparent; }"
+    },
+    {
+      "name": "Lomo (spine nav)",
+      "kind": "nav",
+      "refersTo": "lomo",
+      "description": "Fixed left spine: striped cap, vertical title and block index, tape counter in a recessed well with its pilot.",
+      "html": "<nav class=\"ds-lomo\" aria-label=\"Lomo de la cinta\"><a class=\"ds-lomo-titulo\" href=\"#\">AFR · Claude Skills</a><ol class=\"ds-lomo-caras\"><li><a href=\"#\">Packs</a></li><li><a href=\"#\">Arte</a></li><li><a href=\"#\">Scroll</a></li></ol><p class=\"ds-lomo-contador\">417</p></nav>",
+      "css": ".ds-lomo { width: 72px; height: 420px; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 0 16px; background: var(--negro-2, #1b1c1f); border-right: 1px solid var(--negro-3, #26282c); color: var(--blanco, #ecebef); } .ds-lomo::before { content: ''; align-self: stretch; height: 54px; background: repeating-linear-gradient(135deg, var(--naranja, #ff5a1f) 0 9px, var(--amarillo, #ffc21a) 9px 18px, var(--agua, #2bb3a6) 18px 27px); } .ds-lomo-titulo { writing-mode: vertical-rl; rotate: 180deg; font: 800 13px/1 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-stretch: 112%; text-transform: uppercase; text-decoration: none; color: inherit; white-space: nowrap; } .ds-lomo-caras { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; align-items: center; } .ds-lomo-caras a { display: block; writing-mode: vertical-rl; rotate: 180deg; padding: 6px 7px; border-radius: 6px; text-decoration: none; font: 700 11px/1 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-stretch: 75%; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gris, #a9a7b2); } .ds-lomo-caras a:hover, .ds-lomo-caras a:focus-visible { background: var(--negro-3, #26282c); color: var(--blanco, #ecebef); outline: 2px solid var(--amarillo, #ffc21a); outline-offset: 3px; } .ds-lomo-caras a:hover { outline: none; } .ds-lomo-contador { position: relative; margin: auto 0 0; padding: 6px 7px; border-radius: 6px; background: var(--pozo, #0b0b0c); box-shadow: inset 0 1px 3px #000c; font: 600 15px/1 'JetBrains Mono Variable', ui-monospace, monospace; font-variant-numeric: tabular-nums; color: var(--amarillo, #ffc21a); } .ds-lomo-contador::after { content: ''; position: absolute; top: -5px; right: -5px; width: 9px; height: 9px; border-radius: 50%; background: var(--piloto-apagado, #5a1410); box-shadow: 0 0 0 2px var(--negro-2, #1b1c1f); }"
+    },
+    {
+      "name": "Aviso (toast)",
+      "kind": "custom",
+      "refersTo": "aviso",
+      "description": "Paper slip confirming a copy, with a lit red pilot dot; grey dot on failure.",
+      "html": "<p class=\"ds-aviso\" role=\"status\">Grabado. Pégalo en Claude Code.</p>",
+      "css": ".ds-aviso { display: inline-flex; align-items: center; gap: 10px; margin: 12px; padding: 12px 18px; border-radius: 6px; background: var(--papel, #ece8f4); color: var(--tinta-papel, #19172a); font: 700 16px/1.4 'Archivo Variable', 'Archivo', system-ui, sans-serif; box-shadow: 0 10px 30px -10px #000; } .ds-aviso::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--piloto, #e5322d); box-shadow: 0 0 10px var(--piloto, #e5322d); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Cinta de recopilación",
+    "overview": "The shelf is a mixtape Pedro records for the community, and the page is its packaging seen up close. The ground is the black of a J-card insert. On it sit printed and handwritten things: a lilac paper cassette label with the title in marker, two \"sides\" (Cara A · Pack web, Cara B · Pack backend) with their tracklists and a REC key each, a dubbed bootleg tape for Everything Claude Code, Dymo embossed-tape labels for every skill's state, and, beside each block's tracklist, a tape deck (pletina) where that track's demo plays. A fixed spine (lomo) runs down the left with the title, the block index and a tape counter.\n\nDensity is that of a tracklist, not a card gallery: tracks are numbered rows with a provenance line (author, licence, stars) and a Dymo state, expanding in place to Pedro's notes and the record keys. The material vocabulary is physical and limited: paper, marker, biro, embossed plastic tape, brown tape oxide, a red record pilot, and three diagonal bands of orange, yellow and teal that cross the label, cap the spine and sash each side card. Motion is the motion of a tape machine: keys sink, the pilot blinks, reels turn and the counter advances.\n\nConfirmed rejections from the direction contract: the dark directory of identical cards, and the split product sheet repeated zigzag 38 times.",
+    "keyCharacteristics": [
+      "J-card black ground (negro) with paper labels (papel) as the only light surfaces.",
+      "Three bands, always together and always in order: naranja, amarillo, agua.",
+      "Archivo as the cassette's printed type, pushed across its width axis from 75% to 125%; marker and biro for anything \"written by hand\".",
+      "Every copy action is a REC key with a pilot light; the red pilot means recording and nothing else.",
+      "Each state is an embossed Dymo label in a fixed colour.",
+      "Two radii for the world (10px objects, 6px controls) plus 3px for Dymo tape.",
+      "Demos live inside a deck's stage and are allowed to look like other skills; the frame around them never does."
+    ],
+    "rules": [
+      {
+        "name": "The Three Bands Rule",
+        "body": "Orange, yellow and teal appear together, in that order, as bands, stripes or a sash. Teal never appears alone as an accent, text colour or fill.",
+        "section": "colors"
+      },
+      {
+        "name": "The Red Means REC Rule",
+        "body": "Piloto red marks recording state only: the REC pilot, the spine counter while recording, the copy-confirmation dot. Errors use grey, never red.",
+        "section": "colors"
+      },
+      {
+        "name": "The Paper Is the Only Light Rule",
+        "body": "On the black frame, every light surface is a paper object (cassette, deck label, mission, bootleg strip, toast). There are no white or light-grey panels.",
+        "section": "colors"
+      },
+      {
+        "name": "The Width Axis Rule",
+        "body": "Archivo carries hierarchy through its width axis as much as its weight: wide (118–125%) for headings and printed spec lines, near-normal (106–112%) for track names and keys, narrow (75%) for spine and Dymo tape. Never substitute a second sans.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hand Is for Paper and Margins Rule",
+        "body": "Permanent Marker titles a label; Reenie Beanie annotates in a line or two. Neither sets paragraphs, buttons or data.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mono Measures Rule",
+        "body": "JetBrains Mono is for numbers, counts, slugs, commands and prompts only, never for headings, labels or prose.",
+        "section": "typography"
+      },
+      {
+        "name": "The Key Travel Rule",
+        "body": "A solid offset lip belongs only to pressable transport keys (REC, deck play) and must collapse to zero with a 3px sink when pressed. It is a key's side, not a decorative shadow, and never goes on cards, labels or panels.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the frame on negro J-card black and make every light surface a papel object (cassette, deck label, mission insert, bootleg strip, toast).",
+      "Do use the three bands together and in order (naranja, amarillo, agua) as stripes, a cap or a sash.",
+      "Do use 10px for objects, 6px for controls and slips, 3px for Dymo tape; keep native circles and the reel-window capsule as they are.",
+      "Do make every copy action a REC key with a pilot lamp: naranja only for the two pack sides, blanco for track and block keys, negro-3 for the bootleg.",
+      "Do give pressable transport keys the 3px lip that collapses on press, and nothing else.",
+      "Do show every state as a Dymo label in its fixed colour, white narrow caps.",
+      "Do number tracks with two-digit tabular mono and keep provenance (author, licence, stars) on the row.",
+      "Do write labels by hand on paper: the title in Permanent Marker boli, side notes and margin words in Reenie Beanie amarillo.",
+      "Do mount every new demo in a deck's stage so the transport, label and empty state stay consistent.",
+      "Do use the dark ring with yellow halo for focus on paper and inside the demo stage, and the 2px amarillo outline everywhere else.",
+      "Do honour reduced motion: still reels, no auto-play, final frame shown."
+    ],
+    "donts": [
+      "Don't use piloto red for anything but recording; errors use grey.",
+      "Don't use agua on its own as an accent, text or fill.",
+      "Don't set headings, labels or prose in JetBrains Mono, or numbers and prompts in Archivo.",
+      "Don't set paragraphs, buttons or data in Permanent Marker or Reenie Beanie.",
+      "Don't add a second sans or a serif to the frame; EB Garamond belongs to the demo stage only.",
+      "Don't let demo-stage styling (gradients, pills, kickers, serif display) leak into the frame, or restyle demo interiors from frame tokens beyond `--mono`.",
+      "Don't turn tracks into a grid of equal cards; tracks are numbered rows in a list.",
+      "Don't put solid offset shadows on cards, labels or panels; depth there is the soft drop shadow only.",
+      "Don't introduce radii outside 10, 6 and 3px for new objects or controls.",
+      "Don't use the yellow focus outline on paper, where it disappears."
+    ]
+  }
+}

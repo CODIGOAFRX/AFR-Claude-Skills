@@ -14,9 +14,11 @@
     "node": ">=20"
   },
   "dependencies": {
-    "@fontsource-variable/fraunces": "^5.3.0",
-    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource-variable/eb-garamond": "^5.3.0",
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@fontsource/permanent-marker": "^5.3.0",
+    "@fontsource/reenie-beanie": "^5.3.0",
     "gsap": "^3.15.1"
   },
   "devDependencies": {
