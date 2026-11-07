@@ -97,7 +97,7 @@ Son skills «antislop»: dan criterio de dirección de arte para que las webs no
 
 **Cómo se instalan:**
 
-- **Impeccable:** `npx impeccable install` en la raíz del proyecto, y después `/impeccable init`.
+- **Impeccable:** `npx -y impeccable install --project --providers=claude -y` en la raíz del proyecto (sin esas opciones se instala global, para todos los agentes), y después `/impeccable init`.
 - **Awesome Design MD:** se descarga el `DESIGN.md` de la marca a la raíz y se añade una línea en `CLAUDE.md`.
 - **SkillUI:** `npx skillui --url <web>`, y el resultado va a `.claude/skills` del proyecto.
 

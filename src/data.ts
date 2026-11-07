@@ -192,8 +192,8 @@ export const SKILLS: Skill[] = [
     id: 'impeccable', nombre: 'Impeccable', bloque: 'pulir', autor: 'Paul Bakaus', repo: 'https://github.com/pbakaus/impeccable', estrellas: '105 k', licencia: 'Apache-2.0', estado: 'proyecto',
     hace: 'Vocabulario de diseño para el agente: /impeccable audit, polish, critique, bolder, quieter… Detecta el aspecto de IA antes de publicar.',
     cuando: 'Proyectos web que quieras dejar con aspecto profesional, como un portfolio.',
-    instalar: 'npx impeccable install',
-    prompt: 'Instala la skill Impeccable solo en este proyecto: ejecuta "npx impeccable install"\nen la raíz del proyecto (repo oficial: https://github.com/pbakaus/impeccable).\nDespués dime cómo lanzar "/impeccable init" para configurarla.',
+    instalar: 'npx -y impeccable install --project --providers=claude -y',
+    prompt: 'Instala la skill Impeccable solo en este proyecto: ejecuta "npx -y impeccable install --project --providers=claude -y"\nen la raíz del proyecto (repo oficial: https://github.com/pbakaus/impeccable).\nDespués dime cómo lanzar "/impeccable init" para configurarla.',
   },
   {
     id: 'awesome-design-md', nombre: 'Awesome Design MD', bloque: 'pulir', autor: 'VoltAgent', repo: 'https://github.com/VoltAgent/awesome-design-md', estrellas: '126 k', licencia: 'MIT', estado: 'proyecto',
@@ -347,7 +347,7 @@ PASO 1 - Globales (solo las que falten)
 
 PASO 2 - De este proyecto
 - Impeccable | https://github.com/pbakaus/impeccable
-  npx impeccable install en la raíz.
+  npx -y impeccable install --project --providers=claude -y en la raíz (sin esas opciones se instala global y para todos los agentes).
 ${CALDO}
 - scroll-world | https://github.com/oso95/scroll-world
   claude plugin marketplace add oso95/scroll-world
