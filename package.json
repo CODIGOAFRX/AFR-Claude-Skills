@@ -1,0 +1,26 @@
+{
+  "name": "afr-claude-skills",
+  "version": "1.0.0",
+  "description": "El estante de skills para Claude Code que uso: qué hace cada una, de dónde sale y cómo instalarla, con una demo hecha a su manera.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "npm run build && npx --yes wrangler dev",
+    "deploy": "npm run build && npx --yes wrangler deploy"
+  },
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "gsap": "^3.15.1"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vite": "^6.4.5"
+  }
+}

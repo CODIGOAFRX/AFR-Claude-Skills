@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AFR · Claude Skills</title>
+    <meta name="description" content="Las skills y herramientas para Claude Code que uso: qué hace cada una, de dónde sale y cómo instalarla, con una demo hecha a su manera." />
+    <meta name="theme-color" content="#f3efe6" />
+    <meta property="og:title" content="AFR · Claude Skills" />
+    <meta property="og:description" content="El estante de skills para Claude Code de Pedro Gómez, con una demo por skill." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2316140f'/%3E%3Cpath d='M9 24 16 8l7 16M11.5 18.5h9' fill='none' stroke='%23f3efe6' stroke-width='2.6' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <a class="saltar" href="#bloques">Saltar al catálogo</a>
+    <header class="barra">
+      <a class="marca" href="#arriba" aria-label="AFR · Claude Skills, inicio"><span class="marca-a">A</span> AFR · Claude Skills</a>
+      <nav aria-label="Enlaces">
+        <a href="https://github.com/CODIGOAFRX/AFR-Claude-Skills" target="_blank" rel="noopener noreferrer">Código</a>
+        <a href="https://pedrogomez.dev/">pedrogomez.dev</a>
+      </nav>
+    </header>
+
+    <main id="arriba">
+      <section class="portada" aria-labelledby="titulo">
+        <div class="portada-izq">
+          <p class="portada-k">Lo que uso con Claude Code · revisado el <span id="revisado"></span></p>
+          <h1 id="titulo">El estante<br />de <em>skills</em></h1>
+          <p class="portada-sub">
+            <span id="total"></span> skills y herramientas externas: qué hace cada una, de quién es y cómo instalarla.
+            Cada ficha trae una demo hecha a la manera de su skill. Copia el comando o el prompt y pégalo en Claude Code.
+          </p>
+        </div>
+        <div class="portada-der">
+          <label class="buscar"><span>Buscar</span><input id="buscar" type="search" placeholder="scroll, tests, memoria, marca…" autocomplete="off" spellcheck="false" /></label>
+          <div id="filtros" class="filtros" role="group" aria-label="Filtrar por estado"></div>
+          <p id="mostrando" class="mostrando" aria-live="polite"></p>
+          <ol id="indice" class="indice" aria-label="Bloques"></ol>
+        </div>
+      </section>
+
+      <div id="bloques"></div>
+
+      <section class="mision" id="mision" aria-labelledby="t-mision">
+        <div>
+          <p class="bloque-num">Extra</p>
+          <h2 id="t-mision">Plantilla de prompt «Misión»</h2>
+          <p class="bloque-lema">No es una skill: es la forma de pedirle a Claude una tarea grande. Cambia lo que va entre corchetes, aquí mismo, y cópialo.</p>
+          <button id="mision-copiar" class="copiar">Copiar la misión</button>
+        </div>
+        <pre id="mision-texto" class="mision-texto"></pre>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <p>Hecho por <a href="https://pedrogomez.dev/">Pedro Gómez</a>. Las descripciones son mías; cada skill pertenece a su autor y tiene su propia licencia. Las demos son ilustrativas.</p>
+      <p><a href="https://github.com/CODIGOAFRX/AFR-Claude-Skills" target="_blank" rel="noopener noreferrer">¿Falta una? El catálogo es un solo archivo: src/data.ts</a></p>
+    </footer>
+    <p id="aviso" class="aviso" role="status" aria-live="polite"></p>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

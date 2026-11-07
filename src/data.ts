@@ -1,0 +1,288 @@
+// El catálogo entero. Añadir una skill nueva es añadir una entrada aquí y, si se quiere, su demo en demos.ts.
+// Las descripciones son mías; las estrellas son las de GitHub el día de `REVISADO`.
+
+export const REVISADO = '7 nov 2026';
+
+export type Estado = 'global' | 'proyecto' | 'opcional' | 'ideas' | 'radar';
+
+export const ESTADOS: Record<Estado, { nombre: string; explica: string }> = {
+  global: { nombre: 'Global', explica: 'Instalada en ~/.claude: funciona en todos los proyectos.' },
+  proyecto: { nombre: 'Por proyecto', explica: 'Se instala dentro de cada proyecto con su prompt.' },
+  opcional: { nombre: 'Opcional', explica: 'Útil, con letra pequeña: se solapa o instala servicios.' },
+  ideas: { nombre: 'Solo ideas', explica: 'La leí y saqué ideas, pero no construyo con ella.' },
+  radar: { nombre: 'En el radar', explica: 'Todavía no la he descargado.' },
+};
+
+export interface Bloque {
+  id: string;
+  nombre: string;
+  lema: string;
+  repo?: { url: string; estrellas: string; licencia?: string };
+  instalar?: string;
+}
+
+export interface Skill {
+  id: string;
+  nombre: string;
+  bloque: string;
+  autor: string;
+  repo: string;
+  estrellas?: string;
+  licencia?: string;
+  estado: Estado;
+  hace: string;
+  cuando?: string;
+  ojo?: string;
+  instalar?: string;
+  prompt?: string;
+  /** Sin demo propia: se pinta como ficha compacta. */
+  compacta?: boolean;
+}
+
+const TASTE = 'https://github.com/Leonxlnx/taste-skill';
+const UIPRO = 'https://github.com/nextlevelbuilder/ui-ux-pro-max-skill';
+
+export const BLOQUES: Bloque[] = [
+  {
+    id: 'taste',
+    nombre: 'Dirección de arte',
+    lema: 'Taste Skill: criterio para que una web no parezca una plantilla de IA. Cada ficha de este bloque está maquetada con la regla de su skill.',
+    repo: { url: TASTE, estrellas: '111 k', licencia: 'MIT' },
+    instalar: 'claude plugin marketplace add Leonxlnx/taste-skill\nclaude plugin install taste-skill@taste-skill --scope user',
+  },
+  {
+    id: 'sistema',
+    nombre: 'Sistema de diseño',
+    lema: 'UI UX Pro Max y las skills de ClaudeKit que trae: paletas, tipografías, tokens, marca y piezas.',
+    repo: { url: UIPRO, estrellas: '146 k', licencia: 'MIT' },
+    instalar: 'npx -y ui-ux-pro-max-cli init --ai claude --global',
+  },
+  { id: 'pulir', nombre: 'Pulir y copiar estilos', lema: 'Para dejar un diseño fino o partir del estilo de una marca o de una web que te guste.' },
+  { id: 'revisar', nombre: 'Revisar, probar y ordenar', lema: 'Auditar la interfaz, abrirla en un navegador de verdad, desenredar el código y buscar la skill que falta.' },
+  {
+    id: 'slides',
+    nombre: 'Presentaciones',
+    lema: 'Las que he mirado para hacer decks. Ninguna construye los míos: todas generan HTML o imágenes, así que me quedo con sus ideas de ritmo.',
+  },
+  { id: 'agentes', nombre: 'Agentes y automatización', lema: 'Especialistas a los que delegar, workflows de n8n y el paquete gordo, con cuidado.' },
+  { id: 'memoria', nombre: 'Memoria y conocimiento', lema: 'Que Claude recuerde entre sesiones y que una app responda sobre tus documentos.' },
+];
+
+export const SKILLS: Skill[] = [
+  // ——— Dirección de arte · Taste Skill
+  {
+    id: 'design-taste-frontend', nombre: 'design-taste-frontend', bloque: 'taste', autor: 'Leon Lin', repo: TASTE, estrellas: '111 k', licencia: 'MIT', estado: 'global',
+    hace: 'La principal del pack. Lee el brief, decide una dirección de diseño y entrega landings y portfolios que no parecen de plantilla, con un chequeo previo estricto.',
+    cuando: 'Al empezar cualquier landing, portfolio o rediseño.',
+  },
+  {
+    id: 'gpt-taste', nombre: 'gpt-taste', bloque: 'taste', autor: 'Leon Lin', repo: TASTE, estrellas: '111 k', licencia: 'MIT', estado: 'global',
+    hace: 'Motion con GSAP: estructura AIDA, tipografía editorial ancha, bento sin huecos y ScrollTrigger con pin, apilado y scrub.',
+    cuando: 'Cuando la página tiene que contarse con el scroll.',
+  },
+  {
+    id: 'high-end-visual-design', nombre: 'high-end-visual-design', bloque: 'taste', autor: 'Leon Lin', repo: TASTE, estrellas: '111 k', licencia: 'MIT', estado: 'global',
+    hace: 'Diseña como una agencia cara: fuentes, espaciado, sombras, tarjetas y animaciones concretas, y prohíbe los defaults que abaratan.',
+    cuando: 'Producto premium, marca de lujo, cualquier cosa que tenga que parecer cara.',
+  },
+  {
+    id: 'minimalist-ui', nombre: 'minimalist-ui', bloque: 'taste', autor: 'Leon Lin', repo: TASTE, estrellas: '111 k', licencia: 'MIT', estado: 'global',
+    hace: 'Editorial limpio: monocromo cálido, contraste tipográfico, bento plano y pasteles apagados. Sin degradados ni sombras fuertes.',
+    cuando: 'Blogs, documentación, herramientas que tienen que respirar.',
+  },
+  {
+    id: 'industrial-brutalist-ui', nombre: 'industrial-brutalist-ui', bloque: 'taste', autor: 'Leon Lin', repo: TASTE, estrellas: '111 k', licencia: 'MIT', estado: 'global',
+    hace: 'Imprenta suiza cruzada con terminal militar: rejilla rígida, escala tipográfica extrema, color utilitario y degradación analógica.',
+    cuando: 'Dashboards con muchos datos o portfolios que quieran parecer un plano desclasificado.',
+  },
+  {
+    id: 'redesign-existing-projects', nombre: 'redesign-existing-projects', bloque: 'taste', autor: 'Leon Lin', repo: TASTE, estrellas: '111 k', licencia: 'MIT', estado: 'global',
+    hace: 'Audita una web que ya existe y la sube a calidad premium sin romper lo que funciona. Sirve con cualquier framework o CSS a pelo.',
+    cuando: 'Webs heredadas, de clientes o tuyas de hace años.',
+  },
+  {
+    id: 'image-to-code', nombre: 'image-to-code', bloque: 'taste', autor: 'Leon Lin', repo: TASTE, estrellas: '111 k', licencia: 'MIT', estado: 'global',
+    hace: 'Primero genera la imagen del diseño, la analiza a fondo y después la implementa en código lo más fiel posible.',
+    cuando: 'Cuando lo visual manda y quieres ver el diseño antes de escribir HTML.',
+  },
+  {
+    id: 'imagegen-frontend-web', nombre: 'imagegen-frontend-web', bloque: 'taste', autor: 'Leon Lin', repo: TASTE, estrellas: '111 k', licencia: 'MIT', estado: 'global',
+    hace: 'Genera referencias de diseño web: una imagen horizontal por cada sección, con composiciones y llamadas a la acción variadas y una sola paleta.',
+    cuando: 'Para enseñar una propuesta antes de programar, sección a sección.',
+  },
+  {
+    id: 'imagegen-frontend-mobile', nombre: 'imagegen-frontend-mobile', bloque: 'taste', autor: 'Leon Lin', repo: TASTE, estrellas: '111 k', licencia: 'MIT', estado: 'global',
+    hace: 'Conceptos de pantallas de app para iOS y Android, coherentes entre sí y dentro de un mockup de teléfono. Solo imágenes, no código.',
+    cuando: 'Para pensar un flujo móvil antes de abrir Figma o el editor.',
+  },
+  {
+    id: 'stitch-design-taste', nombre: 'stitch-design-taste', bloque: 'taste', autor: 'Leon Lin', repo: TASTE, estrellas: '111 k', licencia: 'MIT', estado: 'global',
+    hace: 'Escribe un DESIGN.md para Google Stitch con reglas estrictas de tipografía, color calibrado, maquetación asimétrica y movimiento.',
+    cuando: 'Si diseñas con Stitch o quieres un DESIGN.md que otro agente entienda.',
+  },
+  {
+    id: 'full-output-enforcement', nombre: 'full-output-enforcement', bloque: 'taste', autor: 'Leon Lin', repo: TASTE, estrellas: '111 k', licencia: 'MIT', estado: 'global',
+    hace: 'Impide que el modelo recorte el código con «…el resto igual» y le obliga a partir bien las respuestas que no caben.',
+    cuando: 'Archivos largos, componentes enteros, cualquier entrega que tenga que ser completa.',
+  },
+  {
+    id: 'brandkit', nombre: 'brandkit', bloque: 'taste', autor: 'Leon Lin', repo: TASTE, estrellas: '111 k', licencia: 'MIT', estado: 'global',
+    hace: 'Láminas de guía de marca: sistemas de logo, decks de identidad y mundos visuales, con composición cuidada y poca tipografía.',
+    cuando: 'Al arrancar una marca o presentar una identidad.',
+  },
+  {
+    id: 'design-taste-frontend-v1', nombre: 'design-taste-frontend-v1', bloque: 'taste', autor: 'Leon Lin', repo: TASTE, estrellas: '111 k', licencia: 'MIT', estado: 'global', compacta: true,
+    hace: 'La primera versión de design-taste-frontend, conservada tal cual para proyectos que dependan de su comportamiento exacto. Para lo nuevo, la v2.',
+  },
+
+  // ——— Sistema de diseño · UI UX Pro Max
+  {
+    id: 'ui-ux-pro-max', nombre: 'ui-ux-pro-max', bloque: 'sistema', autor: 'ClaudeKit', repo: UIPRO, estrellas: '146 k', licencia: 'MIT', estado: 'global',
+    hace: 'La skill madre: datos de diseño consultables con 50 estilos, 192 paletas por tipo de producto, 74 parejas tipográficas, 119 pautas de UX, 25 tipos de gráfico y 22 stacks.',
+    cuando: 'Siempre que haya que elegir paleta, fuentes o estilo con criterio y no a ojo.',
+  },
+  {
+    id: 'design', nombre: 'design', bloque: 'sistema', autor: 'ClaudeKit', repo: UIPRO, estrellas: '146 k', licencia: 'MIT', estado: 'global',
+    hace: 'El paraguas: identidad de marca, logos en 55 estilos, programa de identidad corporativa con mockups, iconos SVG, banners y fotos para redes.',
+    cuando: 'Logos, iconos y piezas de identidad.',
+  },
+  {
+    id: 'brand', nombre: 'brand', bloque: 'sistema', autor: 'ClaudeKit', repo: UIPRO, estrellas: '146 k', licencia: 'MIT', estado: 'global',
+    hace: 'Voz de marca, identidad visual, marcos de mensaje, gestión de assets y coherencia entre todas las piezas.',
+    cuando: 'Para que los textos y las piezas suenen a la misma marca.',
+  },
+  {
+    id: 'design-system', nombre: 'design-system', bloque: 'sistema', autor: 'ClaudeKit', repo: UIPRO, estrellas: '146 k', licencia: 'MIT', estado: 'global',
+    hace: 'Tokens en tres capas (primitivo, semántico y componente), variables CSS, escalas de espaciado y tipografía y especificación de componentes.',
+    cuando: 'Cuando el proyecto va a crecer y hace falta un sistema, no colores sueltos.',
+  },
+  {
+    id: 'banner-design', nombre: 'banner-design', bloque: 'sistema', autor: 'ClaudeKit', repo: UIPRO, estrellas: '146 k', licencia: 'MIT', estado: 'global',
+    hace: 'Banners para redes, anuncios, cabeceras web e impresión, con varias direcciones de arte y 22 estilos.',
+    cuando: 'Una misma campaña en todos los formatos.',
+  },
+  {
+    id: 'slides', nombre: 'slides', bloque: 'sistema', autor: 'ClaudeKit', repo: UIPRO, estrellas: '146 k', licencia: 'MIT', estado: 'global',
+    hace: 'Presentaciones HTML estratégicas con Chart.js, tokens de diseño, maquetación adaptable y fórmulas de copy.',
+    cuando: 'Decks con datos que vayan a verse en el navegador.',
+  },
+  {
+    id: 'ui-styling', nombre: 'ui-styling', bloque: 'sistema', autor: 'ClaudeKit', repo: UIPRO, estrellas: '146 k', licencia: 'MIT', estado: 'global',
+    hace: 'Interfaces con shadcn/ui (Radix y Tailwind): modo oscuro, componentes accesibles como diálogos, desplegables y formularios, y diseño en canvas.',
+    cuando: 'Proyectos React con Tailwind.',
+  },
+
+  // ——— Pulir y copiar estilos
+  {
+    id: 'impeccable', nombre: 'Impeccable', bloque: 'pulir', autor: 'Paul Bakaus', repo: 'https://github.com/pbakaus/impeccable', estrellas: '105 k', licencia: 'Apache-2.0', estado: 'proyecto',
+    hace: 'Vocabulario de diseño para el agente: /impeccable audit, polish, critique, bolder, quieter… Detecta el aspecto de IA antes de publicar.',
+    cuando: 'Proyectos web que quieras dejar con aspecto profesional, como un portfolio.',
+    instalar: 'npx impeccable install',
+    prompt: 'Instala la skill Impeccable solo en este proyecto: ejecuta "npx impeccable install"\nen la raíz del proyecto (repo oficial: https://github.com/pbakaus/impeccable).\nDespués dime cómo lanzar "/impeccable init" para configurarla.',
+  },
+  {
+    id: 'awesome-design-md', nombre: 'Awesome Design MD', bloque: 'pulir', autor: 'VoltAgent', repo: 'https://github.com/VoltAgent/awesome-design-md', estrellas: '126 k', licencia: 'MIT', estado: 'proyecto',
+    hace: 'Una colección de DESIGN.md que analizan el sistema de diseño de marcas conocidas. Pones uno en la raíz del proyecto y el agente diseña con ese estilo.',
+    cuando: 'Al empezar un diseño y querer una referencia clara.',
+    prompt: 'Descarga el DESIGN.md de la marca [MARCA] desde https://github.com/VoltAgent/awesome-design-md\ny ponlo en la raíz de este proyecto. A partir de ahora usa ese DESIGN.md como guía de diseño\ny añade una línea en el CLAUDE.md del proyecto para que siempre lo tengas en cuenta.',
+  },
+  {
+    id: 'skillui', nombre: 'SkillUI', bloque: 'pulir', autor: 'Amaan Khan', repo: 'https://github.com/amaancoderx/npxskillui', estrellas: '2,5 k', estado: 'proyecto',
+    hace: 'Una CLI que rastrea una web, un repo o tu código y extrae su sistema de diseño (colores, tipografía, espaciado, animaciones) en una skill que Claude lee sola. Sin IA ni API keys.',
+    cuando: 'Cuando ves una web y piensas «quiero que lo mío se vea así».',
+    instalar: 'npx skillui --url https://la-web-que-te-gusta.com',
+    prompt: 'Usa SkillUI (npm "skillui", repo https://github.com/amaancoderx/npxskillui) para extraer\nel sistema de diseño de [URL]. Instálalo si hace falta, genera la skill y colócala en\n.claude/skills de este proyecto para que la uses al diseñar.',
+  },
+
+  // ——— Revisar, probar y encontrar
+  {
+    id: 'web-design-guidelines', nombre: 'web-design-guidelines', bloque: 'revisar', autor: 'Vercel', repo: 'https://github.com/vercel-labs/agent-skills', estrellas: '34 k', estado: 'global',
+    hace: 'Revisa el código de la interfaz contra las Web Interface Guidelines de Vercel: accesibilidad, UX y buenas prácticas.',
+    cuando: 'Antes de dar algo por terminado. Basta con pedir «revisa mi UI».',
+    instalar: 'npx -y skills add vercel-labs/agent-skills --skill web-design-guidelines -g -a claude-code -y',
+  },
+  {
+    id: 'playwright-cli', nombre: 'playwright-cli', bloque: 'revisar', autor: 'Microsoft', repo: 'https://github.com/microsoft/playwright-cli', estrellas: '15 k', licencia: 'Apache-2.0', estado: 'global',
+    hace: 'Claude abre tu web en un navegador real, la recorre, rellena formularios, hace capturas y escribe los tests de Playwright.',
+    cuando: 'Para comprobar que algo funciona de verdad, no solo que compila.',
+    instalar: 'npm install -g @playwright/cli@latest\nplaywright-cli install --skills --global',
+  },
+  {
+    id: 'find-skills', nombre: 'find-skills', bloque: 'revisar', autor: 'Vercel', repo: 'https://github.com/vercel-labs/skills', estrellas: '38 k', licencia: 'MIT', estado: 'global',
+    hace: 'Busca e instala skills cuando preguntas «¿hay alguna skill que haga X?». Es la skill de la CLI abierta npx skills.',
+    cuando: 'Cuando echas en falta algo y sospechas que alguien ya lo ha hecho.',
+    instalar: 'npx skills add vercel-labs/skills --skill find-skills',
+  },
+  {
+    id: 'untangle-codebase', nombre: 'untangle-codebase', bloque: 'revisar', autor: 'Caldo AI', repo: 'https://github.com/caldoai/skills/blob/main/skills/untangle-codebase/SKILL.md', estrellas: '738', licencia: 'MIT', estado: 'radar',
+    hace: 'Refactoriza todo el código de una pasada preguntando solo una cosa: ¿estas piezas deberían cambiar juntas? Primero apunta cada vínculo oculto, vínculo innecesario y código sobrante, y luego los deshace para que los agentes lean menos, rompan menos y depuren antes.',
+    cuando: 'Cuando un proyecto ha crecido a base de parches y cada cambio rompe algo lejos. Se lanza a mano con /untangle-codebase.',
+    instalar: 'npx skills add caldoai/skills --skill untangle-codebase -a claude-code',
+  },
+
+  // ——— Presentaciones
+  {
+    id: 'frontend-slides', nombre: 'frontend-slides', bloque: 'slides', autor: 'Zara Zhang', repo: 'https://github.com/zarazhangrui/frontend-slides', estrellas: '32 k', licencia: 'MIT', estado: 'ideas', compacta: true,
+    hace: 'Presentaciones web hechas con las skills de frontend del agente. De aquí saqué el ritmo: una idea por diapositiva.',
+  },
+  {
+    id: 'html-ppt', nombre: 'html-ppt', bloque: 'slides', autor: 'lewislulu', repo: 'https://github.com/lewislulu/html-ppt-skill', estrellas: '9 k', licencia: 'MIT', estado: 'ideas', compacta: true,
+    hace: 'Estudio de presentaciones HTML con 24 temas, 31 layouts y más de 20 animaciones. Me quedé con cuánto texto cabe por diapositiva.',
+  },
+  {
+    id: 'slidev', nombre: 'slidev', bloque: 'slides', autor: 'Slidev', repo: 'https://github.com/slidevjs/slidev/tree/main/skills/slidev', estrellas: '49 k', estado: 'radar', compacta: true,
+    hace: 'La skill oficial de Slidev: presentaciones para desarrolladores escritas en Markdown. Genera HTML.',
+  },
+  {
+    id: 'slideshow', nombre: 'slideshow', bloque: 'slides', autor: 'HyperFrames · HeyGen', repo: 'https://github.com/heygen-com/hyperframes/tree/main/skills/slideshow', estrellas: '80 k', licencia: 'Apache-2.0', estado: 'radar', compacta: true,
+    hace: 'Pases de diapositivas con HyperFrames, que escribe HTML y lo renderiza a vídeo. Genera HTML.',
+  },
+  {
+    id: 'baoyu-slide-deck', nombre: 'baoyu-slide-deck', bloque: 'slides', autor: 'Jim Liu', repo: 'https://github.com/JimLiu/baoyu-skills/tree/main/skills/baoyu-slide-deck', estrellas: '27 k', licencia: 'MIT', estado: 'radar', compacta: true,
+    hace: 'Genera decks como imágenes. Quedan bonitos, pero sin texto editable.',
+  },
+
+  // ——— Agentes y automatización
+  {
+    id: 'voltagent', nombre: 'Subagentes de VoltAgent', bloque: 'agentes', autor: 'VoltAgent', repo: 'https://github.com/VoltAgent/awesome-claude-code-subagents', estrellas: '26 k', licencia: 'MIT', estado: 'proyecto',
+    hace: 'Más de cien especialistas a los que Claude delega tareas: react-specialist, typescript-pro, code-reviewer, accessibility-tester…',
+    cuando: 'Proyectos grandes en React, Next o TypeScript. Cinco como mucho, nunca categorías enteras.',
+    prompt: 'Instala solo en este proyecto los subagentes de https://github.com/VoltAgent/awesome-claude-code-subagents\nque encajen con su stack (mira el package.json): normalmente react-specialist, typescript-pro,\ncode-reviewer y accessibility-tester. Cópialos a .claude/agents del proyecto, no los instales globales.',
+  },
+  {
+    id: 'n8n-mcp', nombre: 'n8n MCP', bloque: 'agentes', autor: 'Romuald Członkowski', repo: 'https://github.com/czlonkowski/n8n-mcp', estrellas: '23 k', licencia: 'MIT', estado: 'proyecto',
+    hace: 'Un servidor MCP para que Claude cree y valide workflows de n8n por ti.',
+    cuando: 'Solo si trabajas con n8n.',
+    ojo: 'Necesita la URL de tu n8n y una API key (Settings → n8n API). La clave la pegas tú cuando te la pida.',
+    prompt: 'Configura el servidor MCP n8n-mcp (https://github.com/czlonkowski/n8n-mcp) solo para este\nproyecto, siguiendo su docs/CLAUDE_CODE_SETUP.md. Cuando llegue el momento, pídeme la URL de\nmi n8n y la API key.',
+  },
+  {
+    id: 'ecc', nombre: 'Everything Claude Code', bloque: 'agentes', autor: 'Affaan Mustafa', repo: 'https://github.com/affaan-m/ECC', estrellas: '299 k', licencia: 'MIT', estado: 'opcional',
+    hace: 'Un paquete gigante de skills, agentes, hooks y reglas para Claude Code, Codex, Cursor y compañía.',
+    ojo: 'Se solapa con lo que ya tengo y puede llenar el contexto. Si lo quieres, mejor el perfil mínimo.',
+    instalar: 'npx ecc-universal@2.2.3 install --profile minimal --target claude',
+    prompt: 'Instala Everything Claude Code (https://github.com/affaan-m/ECC) en su perfil mínimo con\n"npx ecc-universal@2.2.3 install --profile minimal --target claude". Antes dime qué va a\nañadir y si choca con las skills que ya tengo (taste-skill, ui-ux-pro-max,\nweb-design-guidelines, playwright-cli).',
+  },
+
+  // ——— Memoria y conocimiento
+  {
+    id: 'claude-mem', nombre: 'Claude Mem', bloque: 'memoria', autor: 'Alex Newman', repo: 'https://github.com/thedotmack/claude-mem', estrellas: '114 k', licencia: 'Apache-2.0', estado: 'opcional',
+    hace: 'Memoria automática entre sesiones: captura lo que hace el agente, lo comprime con IA y le devuelve lo relevante en la siguiente.',
+    ojo: 'Instala un servicio en segundo plano y hooks. Claude Code ya tiene memoria y CLAUDE.md, así que pruébalo solo si echas algo en falta.',
+    instalar: 'claude plugin marketplace add thedotmack/claude-mem\nclaude plugin install claude-mem',
+    prompt: 'Instala el plugin Claude Mem (https://github.com/thedotmack/claude-mem) con\n"claude plugin marketplace add thedotmack/claude-mem" y "claude plugin install claude-mem".\nNo uses npm install -g. Explícame qué instala y cómo desactivarlo si no me convence.',
+  },
+  {
+    id: 'lightrag', nombre: 'LightRAG', bloque: 'memoria', autor: 'HKU Data Intelligence Lab', repo: 'https://github.com/HKUDS/LightRAG', estrellas: '41 k', licencia: 'MIT', estado: 'proyecto',
+    hace: 'No es una skill: es una librería de Python para hacer un buscador inteligente sobre tus documentos, con RAG y grafos de conocimiento.',
+    cuando: 'Solo si construyes una app o un agente que tenga que responder sobre una base de documentos.',
+    instalar: 'pip install "lightrag-hku[api]"',
+    prompt: 'Quiero usar LightRAG (https://github.com/HKUDS/LightRAG) en este proyecto. Instálalo en un\nentorno virtual de Python dentro del proyecto y explícame cómo conectarlo a mis documentos.',
+  },
+];
+
+export const MISION = `Necesito [resultado que quiero, ej: automatizar el alta de clientes].
+1. Analiza cómo se hace ahora.
+2. Construye la lógica para conectar [Herramienta A] con [Herramienta B].
+3. Si algo falla, crea un plan B que me avise.
+4. Haz una prueba y enséñame los resultados.`;
