@@ -4,11 +4,12 @@ Las skills y herramientas **externas** que uso con Claude Code: las que he insta
 
 Revisado el 7 de noviembre de 2026 contra el disco y contra cada repositorio. Las estrellas son las de GitHub ese día.
 
-**37 entradas en 7 bloques**, más una plantilla de prompt:
+**38 entradas en 8 bloques**, más una plantilla de prompt:
 
 | Bloque | Entradas |
 |---|---|
 | [1. Dirección de arte · Taste Skill](#1-dirección-de-arte--taste-skill) | 13 |
+| [Mundos con scroll](#mundos-con-scroll) | 1 |
 | [2. Sistema de diseño · UI UX Pro Max](#2-sistema-de-diseño--ui-ux-pro-max) | 7 |
 | [3. Pulir y copiar estilos](#3-pulir-y-copiar-estilos) | 3 |
 | [4. Revisar, probar y ordenar](#4-revisar-probar-y-ordenar) | 4 |
@@ -57,6 +58,19 @@ Son skills «antislop»: dan criterio de dirección de arte para que las webs no
 | `full-output-enforcement` | Impide que el modelo recorte el código con «…resto igual». |
 | `brandkit` | Láminas de guía de marca: sistemas de logo, decks de identidad, mundos visuales. |
 
+## Mundos con scroll
+
+| Skill | Repo | Estado | Qué hace |
+|---|---|---|---|
+| `scroll-world` | [oso95/scroll-world](https://github.com/oso95/scroll-world) · MIT · ★ 10,8 k | Por proyecto | Convierte cualquier marca en una landing de «vuelo por un mundo»: genera dioramas isométricos con IA y los vídeos de cámara entre ellos, y el scroll los avanza fotograma a fotograma, sin cortes. |
+
+- **Instalar:**
+  ```
+  claude plugin marketplace add oso95/scroll-world
+  claude plugin install scroll-world@scroll-world --scope project
+  ```
+- **Ojo:** genera imagen y vídeo con servicios de pago, la CLI de Monid (unos 27 $ por un vuelo de 6 escenas) o créditos de Higgsfield, y necesita ffmpeg y Python con Pillow.
+
 ## 2. Sistema de diseño · UI UX Pro Max
 
 - **Repo:** [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) · MIT · ★ 146 k · autor en las skills: `claudekit`
@@ -94,7 +108,7 @@ Son skills «antislop»: dan criterio de dirección de arte para que las webs no
 | `web-design-guidelines` | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) · ★ 34 k | Global | Audita la interfaz contra las Web Interface Guidelines de Vercel (pide «revisa mi UI»). | `npx -y skills add vercel-labs/agent-skills --skill web-design-guidelines -g -a claude-code -y` |
 | `playwright-cli` | [microsoft/playwright-cli](https://github.com/microsoft/playwright-cli) · Apache-2.0 · ★ 15 k | Global | Claude abre tu web, la recorre, hace capturas y genera tests de Playwright. | `npm install -g @playwright/cli@latest` y, desde tu carpeta de usuario, `playwright-cli install --skills --global` |
 | `find-skills` | [vercel-labs/skills](https://github.com/vercel-labs/skills) · MIT · ★ 38 k | Global | Busca e instala skills cuando preguntas «¿hay alguna skill que haga X?». | `npx skills add vercel-labs/skills --skill find-skills` |
-| `untangle-codebase` | [caldoai/skills](https://github.com/caldoai/skills/blob/main/skills/untangle-codebase/SKILL.md) · MIT · ★ 738 | En el radar | Refactoriza todo el código de una pasada preguntando «¿estas piezas deberían cambiar juntas?»: apunta vínculos ocultos, vínculos innecesarios y código sobrante, y luego los deshace. Se lanza a mano con `/untangle-codebase`. | `npx skills add caldoai/skills --skill untangle-codebase -a claude-code` |
+| `untangle-codebase` | [caldoai/skills](https://github.com/caldoai/skills/blob/main/skills/untangle-codebase/SKILL.md) · MIT · ★ 738 | Por proyecto | Refactoriza todo el código de una pasada preguntando «¿estas piezas deberían cambiar juntas?»: apunta vínculos ocultos, vínculos innecesarios y código sobrante, y luego los deshace. Se lanza a mano con `/untangle-codebase`. | `npx -y skills add caldoai/skills -a claude-code -y` (todas las de Caldo AI) |
 
 ## 5. Presentaciones
 
@@ -149,3 +163,16 @@ Necesito [resultado que quiero, ej: automatizar el alta de clientes].
 3. Si algo falla, crea un plan B que me avise.
 4. Haz una prueba y enséñame los resultados.
 ```
+
+## Packs para copiar
+
+Al final de la landing hay tres botones. Cada uno copia un prompt que se pega en Claude Code, dentro del proyecto:
+
+- **Pack web.** Instala, sin duplicar nada:
+  - **Diseño:** Taste Skill, UI UX Pro Max, Impeccable, scroll-world, Awesome Design MD o SkillUI (pregunta antes).
+  - **Revisión y pruebas:** web-design-guidelines, playwright-cli y find-skills.
+  - **Lo demás:** los subagentes frontend de VoltAgent, las skills de Caldo AI y Claude Mem.
+
+  Después escribe el CLAUDE.md y te recuerda lanzar `/impeccable init`.
+- **Pack backend.** Instala los subagentes de VoltAgent de tu lenguaje más code-reviewer, las skills de Caldo AI, Claude Mem y find-skills. n8n MCP y LightRAG solo los instala si el proyecto los necesita.
+- **Everything Claude Code.** Va aparte. Antes de instalar te dice qué añade y si choca con lo que ya tienes, instala el perfil mínimo y te deja elegir el resto una a una, porque se come el contexto.

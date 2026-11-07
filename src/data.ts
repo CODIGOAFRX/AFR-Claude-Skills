@@ -51,6 +51,11 @@ export const BLOQUES: Bloque[] = [
     instalar: 'claude plugin marketplace add Leonxlnx/taste-skill\nclaude plugin install taste-skill@taste-skill --scope user',
   },
   {
+    id: 'scroll',
+    nombre: 'Mundos con scroll',
+    lema: 'Landings en las que el scroll mueve una cámara: entra en cada escena y sigue a la siguiente sin cortes.',
+  },
+  {
     id: 'sistema',
     nombre: 'Sistema de diseño',
     lema: 'UI UX Pro Max y las skills de ClaudeKit que trae: paletas, tipografías, tokens, marca y piezas.',
@@ -135,6 +140,16 @@ export const SKILLS: Skill[] = [
     hace: 'La primera versión de design-taste-frontend, conservada tal cual para proyectos que dependan de su comportamiento exacto. Para lo nuevo, la v2.',
   },
 
+  // ——— Mundos con scroll
+  {
+    id: 'scroll-world', nombre: 'scroll-world', bloque: 'scroll', autor: 'cyw', repo: 'https://github.com/oso95/scroll-world', estrellas: '10,8 k', licencia: 'MIT', estado: 'proyecto',
+    hace: 'Convierte cualquier marca en una landing de «vuelo por un mundo»: genera dioramas isométricos con IA y los vídeos de cámara entre ellos, y el scroll los avanza fotograma a fotograma, sin cortes. El motor de scrub es JavaScript a pelo y sirve con cualquier stack.',
+    cuando: 'Landings de producto o de marca que tengan que impresionar al primer scroll.',
+    ojo: 'Genera imágenes y vídeo con servicios de pago: la CLI de Monid (un vuelo de 6 escenas en 1080p sale por unos 27 $) o créditos de Higgsfield. También necesita ffmpeg y Python con Pillow.',
+    instalar: 'claude plugin marketplace add oso95/scroll-world\nclaude plugin install scroll-world@scroll-world',
+    prompt: 'Instala la skill scroll-world (https://github.com/oso95/scroll-world) como plugin de este proyecto:\n"claude plugin marketplace add oso95/scroll-world" y "claude plugin install scroll-world@scroll-world --scope project".\nDespués comprueba si tengo ffmpeg, Python con Pillow y la CLI de Monid o la de Higgsfield, y dime qué me falta antes de generar nada.',
+  },
+
   // ——— Sistema de diseño · UI UX Pro Max
   {
     id: 'ui-ux-pro-max', nombre: 'ui-ux-pro-max', bloque: 'sistema', autor: 'ClaudeKit', repo: UIPRO, estrellas: '146 k', licencia: 'MIT', estado: 'global',
@@ -214,10 +229,10 @@ export const SKILLS: Skill[] = [
     instalar: 'npx skills add vercel-labs/skills --skill find-skills',
   },
   {
-    id: 'untangle-codebase', nombre: 'untangle-codebase', bloque: 'revisar', autor: 'Caldo AI', repo: 'https://github.com/caldoai/skills/blob/main/skills/untangle-codebase/SKILL.md', estrellas: '738', licencia: 'MIT', estado: 'radar',
+    id: 'untangle-codebase', nombre: 'untangle-codebase', bloque: 'revisar', autor: 'Caldo AI', repo: 'https://github.com/caldoai/skills/blob/main/skills/untangle-codebase/SKILL.md', estrellas: '738', licencia: 'MIT', estado: 'proyecto',
     hace: 'Refactoriza todo el código de una pasada preguntando solo una cosa: ¿estas piezas deberían cambiar juntas? Primero apunta cada vínculo oculto, vínculo innecesario y código sobrante, y luego los deshace para que los agentes lean menos, rompan menos y depuren antes.',
     cuando: 'Cuando un proyecto ha crecido a base de parches y cada cambio rompe algo lejos. Se lanza a mano con /untangle-codebase.',
-    instalar: 'npx skills add caldoai/skills --skill untangle-codebase -a claude-code',
+    instalar: 'npx -y skills add caldoai/skills -a claude-code -y',
   },
 
   // ——— Presentaciones
@@ -278,6 +293,126 @@ export const SKILLS: Skill[] = [
     cuando: 'Solo si construyes una app o un agente que tenga que responder sobre una base de documentos.',
     instalar: 'pip install "lightrag-hku[api]"',
     prompt: 'Quiero usar LightRAG (https://github.com/HKUDS/LightRAG) en este proyecto. Instálalo en un\nentorno virtual de Python dentro del proyecto y explícame cómo conectarlo a mis documentos.',
+  },
+];
+
+// ——— Packs: un prompt que se pega en Claude Code y deja el proyecto listo para trabajar.
+
+export interface Pack {
+  id: string;
+  nombre: string;
+  para: string;
+  incluye: string[];
+  nota?: string;
+  prompt: string;
+}
+
+const MEMORIA = `PASO 3 - Memoria
+- Claude Mem | https://github.com/thedotmack/claude-mem
+  claude plugin marketplace add thedotmack/claude-mem y claude plugin install claude-mem (no uses npm install -g).
+  Explícame en dos líneas qué instala y cómo desactivarlo.`;
+
+const CIERRE = `ÚLTIMO PASO - CLAUDE.md y resumen
+Crea o actualiza el CLAUDE.md del proyecto con una sección "Skills de este proyecto": qué hay instalado y cuándo usar cada cosa.
+Dame una tabla: herramienta | instalada sí/no | por qué | ruta. Recuérdame reiniciar Claude Code para que se carguen.`;
+
+const CALDO = `- Skills de Caldo AI (untangle-codebase y las que vayan publicando) | https://github.com/caldoai/skills
+  npx -y skills add caldoai/skills -a claude-code -y`;
+
+export const PACKS: Pack[] = [
+  {
+    id: 'web',
+    nombre: 'Pack web',
+    para: 'Webs, landings y cualquier frontend: diseño, scroll, subagentes, revisión, memoria y código limpio.',
+    incluye: ['design-taste-frontend', 'gpt-taste', 'ui-ux-pro-max', 'impeccable', 'scroll-world', 'awesome-design-md', 'skillui', 'web-design-guidelines', 'playwright-cli', 'find-skills', 'voltagent', 'untangle-codebase', 'claude-mem'],
+    nota: 'Al reiniciar Claude Code, lanza /impeccable init y a trabajar.',
+    prompt: `Hola Claude. Deja este proyecto listo para hacer webs con mis skills. Hazlo todo tú, sin preguntarme salvo donde lo indico o si algo falla.
+
+PASO 0 - Mira qué hay
+Comprueba node 18+, npm, git y el CLI "claude". Lista ~/.claude/skills, .claude/ del proyecto y "claude plugin list" para no duplicar nada.
+Lee package.json, el README y la estructura, y dime en 3 líneas qué es el proyecto y qué stack usa.
+
+PASO 1 - Globales (solo las que falten)
+- Taste Skill | https://github.com/Leonxlnx/taste-skill
+  claude plugin marketplace add Leonxlnx/taste-skill
+  claude plugin install taste-skill@taste-skill --scope user
+- UI UX Pro Max | https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+  npx -y ui-ux-pro-max-cli init --ai claude --global
+- Web Design Guidelines | https://github.com/vercel-labs/agent-skills
+  npx -y skills add vercel-labs/agent-skills --skill web-design-guidelines -g -a claude-code -y
+- Playwright CLI | https://github.com/microsoft/playwright-cli
+  npm install -g @playwright/cli@latest y, desde mi carpeta de usuario, playwright-cli install --skills --global
+- find-skills | https://github.com/vercel-labs/skills
+  npx -y skills add vercel-labs/skills --skill find-skills -g -a claude-code -y
+
+PASO 2 - De este proyecto
+- Impeccable | https://github.com/pbakaus/impeccable
+  npx impeccable install en la raíz.
+${CALDO}
+- scroll-world | https://github.com/oso95/scroll-world
+  claude plugin marketplace add oso95/scroll-world
+  claude plugin install scroll-world@scroll-world --scope project
+  Genera imagen y vídeo con servicios de pago (Monid o Higgsfield): instálala, pero no generes nada sin preguntarme.
+- Subagentes de VoltAgent | https://github.com/VoltAgent/awesome-claude-code-subagents
+  Copia a .claude/agents como mucho 5, los que encajen con el stack: react-specialist, nextjs-developer, vue-expert,
+  typescript-pro, frontend-developer, ui-designer, code-reviewer, accessibility-tester. Nunca categorías enteras.
+- PREGÚNTAME si quiero un estilo de referencia. Si digo una marca, descarga su DESIGN.md de
+  https://github.com/VoltAgent/awesome-design-md a la raíz. Si digo una web, usa SkillUI (npx skillui --url <web>,
+  https://github.com/amaancoderx/npxskillui) y deja el resultado en .claude/skills. Si digo que no, sáltalo.
+
+${MEMORIA}
+
+${CIERRE}
+Y dime que, al reiniciar, lance /impeccable init para configurar Impeccable.`,
+  },
+  {
+    id: 'backend',
+    nombre: 'Pack backend',
+    para: 'APIs, servicios y datos: subagentes de tu lenguaje, código limpio, memoria y, si toca, n8n o RAG.',
+    incluye: ['voltagent', 'untangle-codebase', 'claude-mem', 'find-skills', 'playwright-cli', 'n8n-mcp', 'lightrag'],
+    nota: 'n8n MCP y LightRAG solo se instalan si el proyecto los necesita.',
+    prompt: `Hola Claude. Deja este proyecto backend listo para trabajar con mis skills. Hazlo todo tú, sin preguntarme salvo donde lo indico o si algo falla.
+
+PASO 0 - Mira qué hay
+Comprueba node 18+, npm, git, python 3 y el CLI "claude". Lista ~/.claude/skills, .claude/ del proyecto y "claude plugin list" para no duplicar nada.
+Lee pom.xml, build.gradle, package.json, requirements.txt, pyproject.toml o go.mod, el README y la estructura, y dime en 3 líneas qué es y qué stack usa.
+
+PASO 1 - Globales (solo las que falten)
+- find-skills | https://github.com/vercel-labs/skills
+  npx -y skills add vercel-labs/skills --skill find-skills -g -a claude-code -y
+- Playwright CLI, solo si hay alguna interfaz web que probar | https://github.com/microsoft/playwright-cli
+  npm install -g @playwright/cli@latest y, desde mi carpeta de usuario, playwright-cli install --skills --global
+
+PASO 2 - De este proyecto
+${CALDO}
+- Subagentes de VoltAgent | https://github.com/VoltAgent/awesome-claude-code-subagents
+  Copia a .claude/agents como mucho 5: los del stack más code-reviewer. Por ejemplo:
+  Java/Spring: java-architect, spring-boot-engineer · Python: python-pro, fastapi-developer o django-developer ·
+  Node: node-specialist, typescript-pro · Go: golang-pro · Datos: sql-pro o postgres-pro ·
+  APIs: api-designer, backend-developer · Seguridad: security-auditor. Nunca categorías enteras.
+- n8n MCP, SOLO si el proyecto usa n8n | https://github.com/czlonkowski/n8n-mcp
+  Configúralo con alcance de proyecto siguiendo su docs/CLAUDE_CODE_SETUP.md. Pídeme la URL de mi n8n y la API key cuando toque.
+- LightRAG, SOLO si tiene que responder sobre documentos | https://github.com/HKUDS/LightRAG
+  En un entorno virtual de Python dentro del proyecto: pip install "lightrag-hku[api]".
+
+${MEMORIA}
+
+${CIERRE}`,
+  },
+  {
+    id: 'ecc',
+    nombre: 'Everything Claude Code',
+    para: 'Aparte: un paquete enorme de skills, agentes, hooks y reglas del que eliges lo que quieras.',
+    incluye: ['ecc'],
+    nota: 'Se come mucho contexto y se solapa con los otros dos. Mejor el perfil mínimo y añadir solo lo que uses.',
+    prompt: `Hola Claude. Quiero probar Everything Claude Code (https://github.com/affaan-m/ECC), pero con cuidado con el contexto.
+
+1. Antes de instalar nada, dime qué añade su perfil mínimo y si choca con lo que ya tengo
+   (mira ~/.claude/skills, .claude/ del proyecto y "claude plugin list": taste-skill, ui-ux-pro-max, web-design-guidelines, playwright-cli…).
+2. Si te digo que sí, instálalo en su perfil mínimo:
+   npx ecc-universal@2.2.3 install --profile minimal --target claude
+3. Enséñame qué otras skills y agentes trae el repo, agrupados por tema, para que elija cuáles añadir una a una.
+4. Dime cuánto contexto ocupa lo instalado y cómo desinstalarlo si no me convence.`,
   },
 ];
 

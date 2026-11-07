@@ -2,7 +2,7 @@ import '@fontsource-variable/fraunces';
 import '@fontsource-variable/geist';
 import '@fontsource-variable/jetbrains-mono';
 import './styles.css';
-import { BLOQUES, ESTADOS, MISION, REVISADO, SKILLS, type Estado, type Skill } from './data';
+import { BLOQUES, ESTADOS, MISION, PACKS, REVISADO, SKILLS, type Estado, type Skill } from './data';
 import { DEMOS } from './demos';
 
 const $ = <T extends Element = HTMLElement>(sel: string, root: ParentNode = document) => root.querySelector(sel) as T;
@@ -96,6 +96,16 @@ function render() {
   $('#total').textContent = String(SKILLS.length);
   $('#revisado').textContent = REVISADO;
   $('#mision-texto').innerHTML = esc(MISION).replace(/\[([^\]]+)\]/g, '<span class="hueco" contenteditable="plaintext-only" spellcheck="false">[$1]</span>');
+
+  const nombre = (id: string) => SKILLS.find((s) => s.id === id)?.nombre ?? id;
+  $('#packs-lista').innerHTML = PACKS.map((p) => `<article class="pack pack-${p.id}">
+      <h3>${esc(p.nombre)}</h3>
+      <p class="pack-para">${esc(p.para)}</p>
+      <ul class="pack-incluye">${p.incluye.map((id) => `<li><a href="#s-${id}">${esc(nombre(id))}</a></li>`).join('')}</ul>
+      ${p.nota ? `<p class="pack-nota">${esc(p.nota)}</p>` : ''}
+      <button class="copiar pack-boton" data-copia="${esc(p.prompt)}">Copiar ${esc(p.nombre)}</button>
+      <details><summary>Ver el prompt</summary><pre>${esc(p.prompt)}</pre></details>
+    </article>`).join('');
 }
 
 function filtros() {

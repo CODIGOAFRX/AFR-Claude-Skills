@@ -281,6 +281,52 @@ const brandkit: Demo = (el) => {
 
 const tasteV1: Demo = () => {};
 
+// ——— Mundos con scroll
+
+// Proyección isométrica para los dioramas de scroll-world.
+const iso = (x: number, y: number, z: number) => `${(200 + (x - y) * 17.3).toFixed(1)},${(150 + (x + y) * 10 - z * 20).toFixed(1)}`;
+function caja(x: number, y: number, w: number, d: number, h: number, [techo, izq, der]: string[]) {
+  const p = (pts: number[][], c: string) => `<polygon points="${pts.map(([a, b, z]) => iso(a, b, z)).join(' ')}" fill="${c}"/>`;
+  return p([[x, y, h], [x + w, y, h], [x + w, y + d, h], [x, y + d, h]], techo)
+    + p([[x, y + d, 0], [x + w, y + d, 0], [x + w, y + d, h], [x, y + d, h]], izq)
+    + p([[x + w, y, 0], [x + w, y + d, 0], [x + w, y + d, h], [x + w, y, h]], der);
+}
+
+const scrollWorld: Demo = (el) => {
+  el.classList.add('d-mundo');
+  const suelo = (c: string) => caja(-5, -5, 10, 10, 0.4, [c, '#3d5c3a', '#2f4a2d']);
+  const escenas = [
+    // Fuera: una isla con el almacén. La cámara entra por la puerta.
+    { nombre: 'Fuera', origen: '57% 55%', svg: suelo('#8fbf6a') + caja(-2.5, -2.5, 5, 4, 2.6, ['#e9e2d0', '#c9bfa6', '#b0a68c']) + caja(-0.6, 1.5, 1.2, 0.05, 1.4, ['#2b2a26', '#2b2a26', '#2b2a26']) + caja(3, 2.5, 1, 1, 1.4, ['#5c8a46', '#46703a', '#3a5f30']) + caja(-4.2, 2.8, 0.8, 0.8, 1.8, ['#5c8a46', '#46703a', '#3a5f30']) },
+    // Dentro: estanterías con cajas. La cámara sale por el portón del fondo.
+    { nombre: 'Dentro', origen: '50% 34%', svg: caja(-5, -5, 10, 10, 0.2, ['#d9cdb4', '#b8ab8f', '#a3967a']) + [-3.5, -0.5, 2.5].map((x) => caja(x, -3.5, 1.2, 5, 2.2, ['#8a5a3c', '#6e4630', '#5a3826']) + caja(x + 0.1, -3.2, 1, 1, 0.8, ['#e2a24c', '#c9873a', '#b07430']) + caja(x + 0.1, -1.4, 1, 1.2, 1.6, ['#e2a24c', '#c9873a', '#b07430'])).join('') + caja(-1.2, -5, 2.4, 0.1, 2.4, ['#f4eedf', '#f4eedf', '#f4eedf']) },
+    // Destino: la carretera y el camión que se lleva el pedido.
+    { nombre: 'En ruta', origen: '50% 50%', svg: suelo('#9cc777') + caja(-5, -1, 10, 2, 0.45, ['#4a4a52', '#38383e', '#2c2c30']) + caja(-1, -0.6, 2.6, 1.2, 1.5, ['#f4eedf', '#d8cfb8', '#c2b89e']) + caja(1.6, -0.6, 1, 1.2, 1.1, ['#d8452b', '#b23a24', '#962f1d']) + caja(-4, 2.5, 1.4, 1.4, 2.6, ['#c9d6e3', '#a8b8c9', '#8fa1b5']) + caja(2.6, -4, 1.6, 1.6, 3.4, ['#c9d6e3', '#a8b8c9', '#8fa1b5']) },
+  ];
+  el.innerHTML = `<div class="mundo-fijo">${escenas.map((e, i) => `<svg class="mundo-esc" data-i="${i}" viewBox="0 0 400 300" style="transform-origin:${e.origen}" aria-hidden="true">${e.svg}</svg>`).join('')}
+    <ol class="mundo-pasos">${escenas.map((e) => `<li>${e.nombre}</li>`).join('')}</ol>
+    <p class="mundo-pista">El scroll mueve la cámara, sin cortes</p></div>`;
+  const svgs = [...el.querySelectorAll<SVGElement>('.mundo-esc')];
+  const pasos = [...el.querySelectorAll('.mundo-pasos li')];
+  const pon = (t: number) => {
+    const tramos = escenas.length - 1;
+    const k = Math.min(tramos - 1, Math.floor(t * tramos));
+    const u = t * tramos - k;
+    svgs.forEach((s, i) => {
+      let escala = 1, alfa = 0;
+      if (i === k) { escala = lerp(1, 6, u * u); alfa = 1 - tramo(u, 0.7, 1); }
+      else if (i === k + 1) { escala = lerp(0.6, 1, tramo(u, 0.7, 1)); alfa = tramo(u, 0.7, 1); }
+      else if (i < k) alfa = 0;
+      s.style.transform = `scale(${escala.toFixed(3)})`;
+      s.style.opacity = alfa.toFixed(3);
+    });
+    const actual = u > 0.85 ? k + 1 : k;
+    pasos.forEach((p, i) => p.classList.toggle('on', i === actual));
+  };
+  if (RM) { pon(0); return; }
+  alScroll(el, (p) => pon(tramo(p, 0.3, 0.7)));
+};
+
 // ——— Sistema de diseño
 
 const PRODUCTOS: Record<string, { estilo: string; fondo: string; tinta: string; acento: string; display: string; texto: string; titulo: string }> = {
@@ -676,6 +722,7 @@ export const DEMOS: Record<string, Demo> = {
   'full-output-enforcement': salidaCompleta,
   brandkit,
   'design-taste-frontend-v1': tasteV1,
+  'scroll-world': scrollWorld,
   'ui-ux-pro-max': uiPro,
   design,
   brand,

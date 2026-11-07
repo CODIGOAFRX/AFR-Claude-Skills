@@ -29,6 +29,7 @@
             <span id="total"></span> skills y herramientas externas: qué hace cada una, de quién es y cómo instalarla.
             Cada ficha trae una demo hecha a la manera de su skill. Copia el comando o el prompt y pégalo en Claude Code.
           </p>
+          <a class="portada-packs" href="#packs">¿Con prisa? Copia el pack web o el de backend <span aria-hidden="true">↓</span></a>
         </div>
         <div class="portada-der">
           <label class="buscar"><span>Buscar</span><input id="buscar" type="search" placeholder="scroll, tests, memoria, marca…" autocomplete="off" spellcheck="false" /></label>
@@ -48,6 +49,15 @@
           <button id="mision-copiar" class="copiar">Copiar la misión</button>
         </div>
         <pre id="mision-texto" class="mision-texto"></pre>
+      </section>
+
+      <section class="packs" id="packs" aria-labelledby="t-packs">
+        <header class="packs-cabeza">
+          <p class="bloque-num">Para llevar</p>
+          <h2 id="t-packs">Copia un pack y empieza</h2>
+          <p class="bloque-lema">Un botón, un prompt. Lo pegas en Claude Code dentro de tu proyecto y te instala lo que toca, sin duplicar nada, te deja el CLAUDE.md al día y te dice cómo arrancar.</p>
+        </header>
+        <div id="packs-lista" class="packs-lista"></div>
       </section>
     </main>
 

@@ -546,3 +546,40 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
 .aviso { position: fixed; left: 50%; bottom: 24px; translate: -50% 20px; background: var(--tinta); color: var(--papel); padding: 10px 16px; border-radius: 8px; font-size: 14px; opacity: 0; pointer-events: none; transition: opacity 0.25s, translate 0.25s; z-index: 30; }
 .aviso.visible { opacity: 1; translate: -50% 0; }
+
+/* scroll-world · vuelo por un mundo isométrico */
+.escena-scroll-world { min-height: 0; height: 230vh; background: #cfe3f0; overflow: visible; }
+.mundo-fijo { position: sticky; top: 12vh; height: 76vh; overflow: hidden; border-radius: 16px; background: radial-gradient(120% 90% at 50% 20%, #eaf4fb, #b9d5e8); display: grid; place-items: center; }
+.mundo-esc { grid-area: 1 / 1; width: min(92%, 640px); will-change: transform, opacity; }
+.mundo-esc[data-i='1'], .mundo-esc[data-i='2'] { opacity: 0; }
+.mundo-pasos { position: absolute; top: 16px; left: 16px; display: flex; gap: 6px; margin: 0; padding: 0; list-style: none; font: 600 11px var(--mono); }
+.mundo-pasos li { padding: 5px 9px; border-radius: 99px; background: #ffffffaa; color: #4b6478; transition: background 0.3s, color 0.3s; }
+.mundo-pasos li.on { background: #1d3a52; color: #fff; }
+.mundo-pista { position: absolute; bottom: 14px; font: 500 11px var(--mono); color: #4b6478; }
+.skill:has(.escena-scroll-world) { align-items: start; }
+@media (min-width: 1000px) { .skill:has(.escena-scroll-world) .ficha { position: sticky; top: 30vh; } }
+@media (prefers-reduced-motion: reduce) { .escena-scroll-world { height: auto; } .mundo-fijo { position: static; height: 60vh; } }
+
+/* ——— Packs */
+.packs { max-width: var(--ancho); margin: 0 auto; padding: clamp(56px, 8vw, 110px) var(--gutter); border-top: 1px solid var(--tinta); }
+.packs-cabeza { display: grid; gap: 14px; margin-bottom: 40px; }
+.packs-cabeza h2 { font: 560 clamp(38px, 5.5vw, 68px)/0.98 var(--display); letter-spacing: -0.035em; }
+.packs-lista { display: grid; gap: 16px; }
+@media (min-width: 1000px) { .packs-lista { grid-template-columns: 1fr 1fr 0.8fr; align-items: start; } }
+.pack { display: grid; gap: 14px; padding: 28px; border-radius: 16px; background: var(--tinta); color: var(--papel); }
+.pack-ecc { background: transparent; color: var(--tinta); border: 1px dashed var(--tinta-2); }
+.pack h3 { font: 560 clamp(28px, 3vw, 38px)/1 var(--display); letter-spacing: -0.03em; }
+.pack-para { font-size: 16px; opacity: 0.8; }
+.pack-incluye { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.pack-incluye a { display: inline-block; padding: 4px 9px; border-radius: 99px; border: 1px solid currentColor; font: 500 12px var(--mono); text-decoration: none; opacity: 0.75; }
+.pack-incluye a:hover { opacity: 1; }
+.pack-nota { font-size: 14px; color: #ffb59f; }
+.pack-ecc .pack-nota { color: #a0651a; }
+.pack-boton { justify-self: stretch; justify-content: center; min-height: 52px; font-size: 16px; background: var(--acento); color: #fff; }
+.pack-boton:hover { background: #b8361f; }
+.pack details { font-size: 14px; }
+.pack summary { cursor: pointer; opacity: 0.7; }
+.pack pre { margin: 10px 0 0; max-height: 320px; overflow: auto; padding: 14px; border-radius: 8px; background: #ffffff12; font: 12px/1.6 var(--mono); white-space: pre-wrap; }
+.pack-ecc pre { background: var(--papel-2); }
+.portada-packs { display: inline-flex; gap: 8px; margin-top: 24px; padding: 12px 18px; border-radius: 10px; background: var(--acento); color: #fff; font-weight: 600; text-decoration: none; }
+.portada-packs:hover { background: #b8361f; }

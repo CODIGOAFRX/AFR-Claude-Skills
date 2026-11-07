@@ -11,6 +11,7 @@ El estante de skills y herramientas externas que uso con Claude Code: qué hace 
   - `industrial-brutalist-ui` es un expediente desclasificado;
   - `SkillUI` extrae de verdad el sistema de diseño de la propia página;
   - `find-skills` busca en este catálogo.
+- **Tres packs para copiar** al final (web, backend y Everything Claude Code): un prompt que instala lo que toca en tu proyecto.
 - **Buscador y filtros por estado.**
 - **Sin framework:** Vite, TypeScript y CSS. GSAP solo para la sección de `gpt-taste`, cargado bajo demanda. Con «reducir movimiento» activado, todo se queda quieto y se maneja a mano.
 
