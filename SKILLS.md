@@ -219,6 +219,7 @@ Al final de la landing hay tres botones. Cada uno copia un prompt que se pega en
 
 - **Pack web.** Instala, sin duplicar nada:
   - **Diseño:** Taste Skill, UI UX Pro Max, Impeccable, scroll-world, Awesome Design MD o SkillUI (pregunta antes).
+  - **Movimiento:** `emil-design-eng`, `review-animations` y `break-ui`, de Emil Kowalski (solo esas tres).
   - **Revisión y pruebas:** web-design-guidelines, playwright-cli y find-skills.
   - **Lo demás:** los subagentes frontend de VoltAgent, las skills de Caldo AI y Claude Mem.
 

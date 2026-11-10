@@ -452,7 +452,7 @@ export const PACKS: Pack[] = [
     id: 'web',
     nombre: 'Pack web',
     para: 'Webs, landings y cualquier frontend: diseño, scroll, subagentes, revisión, memoria y código limpio.',
-    incluye: ['design-taste-frontend', 'gpt-taste', 'ui-ux-pro-max', 'impeccable', 'scroll-world', 'awesome-design-md', 'skillui', 'web-design-guidelines', 'playwright-cli', 'find-skills', 'voltagent', 'untangle-codebase', 'claude-mem'],
+    incluye: ['design-taste-frontend', 'gpt-taste', 'ui-ux-pro-max', 'impeccable', 'scroll-world', 'awesome-design-md', 'skillui', 'emil-design-eng', 'review-animations', 'break-ui', 'web-design-guidelines', 'playwright-cli', 'find-skills', 'voltagent', 'untangle-codebase', 'claude-mem'],
     nota: 'Al reiniciar Claude Code, lanza /impeccable init y a trabajar.',
     prompt: `Hola Claude. Deja este proyecto listo para hacer webs con mis skills. Hazlo todo tú, sin preguntarme salvo donde lo indico o si algo falla.
 
@@ -477,6 +477,9 @@ PASO 2 - De este proyecto
 - Impeccable | https://github.com/pbakaus/impeccable
   npx -y impeccable install --project --providers=claude -y en la raíz (sin esas opciones se instala global y para todos los agentes).
 ${CALDO}
+- Tres skills de Emil Kowalski, solo esas tres | https://github.com/emilkowalski/skills
+  npx -y skills@latest add emilkowalski/skills --skill emil-design-eng review-animations break-ui -a claude-code -y
+  emil-design-eng para animar con criterio, review-animations para revisar el movimiento y break-ui para probar la interfaz con datos feos.
 - scroll-world | https://github.com/oso95/scroll-world
   claude plugin marketplace add oso95/scroll-world
   claude plugin install scroll-world@scroll-world --scope project
