@@ -2,9 +2,9 @@
 
 Las skills y herramientas **externas** que uso con Claude Code: las que he instalado o probado yo. No están las que ya vienen de serie con Claude (docx, pdf, pptx, xlsx, code-review, loop…).
 
-Revisado el 7 de noviembre de 2026 contra el disco y contra cada repositorio. Las estrellas son las de GitHub ese día.
+Revisado el 10 de noviembre de 2026 contra el disco y contra cada repositorio. Las estrellas son las de GitHub ese día.
 
-**38 entradas en 8 bloques**, más una plantilla de prompt:
+**95 entradas en 12 bloques**, más una plantilla de prompt:
 
 | Bloque | Entradas |
 |---|---|
@@ -12,10 +12,14 @@ Revisado el 7 de noviembre de 2026 contra el disco y contra cada repositorio. La
 | [Mundos con scroll](#mundos-con-scroll) | 1 |
 | [2. Sistema de diseño · UI UX Pro Max](#2-sistema-de-diseño--ui-ux-pro-max) | 7 |
 | [3. Pulir y copiar estilos](#3-pulir-y-copiar-estilos) | 3 |
+| Animación de interfaz | 20 |
 | [4. Revisar, probar y ordenar](#4-revisar-probar-y-ordenar) | 4 |
 | [5. Presentaciones](#5-presentaciones) | 5 |
+| Vídeo: guion, efectos y sonido | 12 |
+| Taller de motion | 20 |
 | [6. Agentes y automatización](#6-agentes-y-automatización) | 3 |
 | [7. Memoria y conocimiento](#7-memoria-y-conocimiento) | 2 |
+| Referencias | 5 |
 | [Extra · Plantilla de prompt «Misión»](#extra--plantilla-de-prompt-misión) | 1 |
 
 **Estados:**
@@ -101,6 +105,39 @@ Son skills «antislop»: dan criterio de dirección de arte para que las webs no
 - **Awesome Design MD:** se descarga el `DESIGN.md` de la marca a la raíz y se añade una línea en `CLAUDE.md`.
 - **SkillUI:** `npx skillui --url <web>`, y el resultado va a `.claude/skills` del proyecto.
 
+## Animación de interfaz
+
+El pack de Emil Kowalski y la skill de transitions.dev: que el agente elija bien la curva, la duración y qué no animar.
+
+| Skill | Repo | Estado | Qué hace |
+|---|---|---|---|
+| `emil-design-eng` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/emil-design-eng) · MIT · ★ 56 k | En el radar | La principal del pack: sobre todo animación, con algo de criterio de diseño. Recoge los fallos pequeños que cometen los agentes y cómo se arreglan. |
+| `animate` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/animate) · MIT · ★ 56 k | En el radar | Construye una animación desde cero eligiendo bien la curva, la duración y las propiedades. |
+| `review-animations` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/review-animations) · MIT · ★ 56 k | En el radar | Revisa tus animaciones con las reglas de Emil, sin contemplaciones. |
+| `improve-animations` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/improve-animations) · MIT · ★ 56 k | En el radar | Audita todas las animaciones del código y devuelve planes priorizados que cualquier agente puede ejecutar por separado. |
+| `find-animation-opportunities` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/find-animation-opportunities) · MIT · ★ 56 k | En el radar | Busca en la interfaz los sitios donde el movimiento aportaría de verdad y avisa de lo que no conviene animar. |
+| `remove-animations` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/remove-animations) · MIT · ★ 56 k | En el radar | Lo contrario: quita las animaciones que sobran, como el fundido en cada sección o el retardo en cada tooltip. |
+| `choreograph` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/choreograph) · MIT · ★ 56 k | En el radar | Coordina varios elementos que se mueven a la vez: quién entra primero, quién le sigue, qué va en paralelo y qué se queda quieto. |
+| `animation-performance` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/animation-performance) · MIT · ★ 56 k | En el radar | Arregla las animaciones que pierden fotogramas, con los problemas finos que los agentes suelen pasar por alto. |
+| `animation-vocabulary` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/animation-vocabulary) · MIT · ★ 56 k | En el radar | El vocabulario para pedirle a una IA la animación exacta que quieres. |
+| `apple-design` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/apple-design) · MIT · ★ 56 k | En el radar | Los principios de Apple sobre interfaz y movimiento fluido, sacados de sus charlas de la WWDC y llevados a la web. |
+| `gestures` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/gestures) · MIT · ★ 56 k | En el radar | Arrastres, deslizamientos y hojas que siguen al dedo, conservan la velocidad al soltar y se pueden atrapar a mitad de animación. |
+| `prototype` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/prototype) · MIT · ★ 56 k | En el radar | Construye varias versiones de una pieza de interfaz y te deja pasar de una a otra con un selector. |
+| `mobile-native` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/mobile-native) · MIT · ★ 56 k | En el radar | Hace que una web se sienta nativa en el móvil: hover pegajoso, el fallo de 100vh, inputs que hacen zoom, zonas seguras y demás. |
+| `break-ui` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/break-ui) · MIT · ★ 56 k | En el radar | Intenta romper tu interfaz con los peores datos: nombres larguísimos, listas vacías, cifras enormes. |
+| `pick-ui-library` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/pick-ui-library) · MIT · ★ 56 k | En el radar | Elige la librería adecuada para cada tarea entre las que Emil usa, en vez de dejar que la IA escriba un toast a mano. |
+| `animate-expo` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/animate-expo) · MIT · ★ 56 k | En el radar | El mismo listón que animate, para React Native y Expo: gestos, hojas, hápticos y transiciones de pantalla. |
+| `write-swift` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/write-swift) · MIT · ★ 56 k | En el radar | Swift moderno: tipos por valor, concurrencia de Swift 6, genéricos, rendimiento y Swift Testing. |
+| `ask-sonner` | [emilkowalski/skills](https://github.com/emilkowalski/skills/tree/main/skills/ask-sonner) · MIT · ★ 56 k | En el radar | La guía de Sonner, la librería de toasts de Emil: montaje, estilos, recetas y arreglos de los problemas habituales. |
+| `transitions.dev` | [Jakubantalik/transitions.dev](https://github.com/Jakubantalik/transitions.dev) · ★ 6,2 k | En el radar | Enseña al agente movimiento de producto: una biblioteca de más de 27 transiciones listas para producción y comandos para listarlas, revisar el proyecto, aplicarlas y pasar las duraciones sueltas a tokens. **Ojo:** Las transiciones Pro son de pago; la skill principal y la de pulido son gratis. |
+| `transitions-polish` | [Jakubantalik/transitions.dev](https://github.com/Jakubantalik/transitions.dev) · ★ 6,2 k | En el radar | El complemento de pulido: alinea el movimiento que ya tienes con la escala de tokens de transitions.dev (abrir y cerrar, hover, escalonados y distancias). Solo informa, no edita. |
+
+**Cómo se instala el pack:**
+
+```bash
+npx skills@latest add emilkowalski/skills
+```
+
 ## 4. Revisar, probar y ordenar
 
 | Skill | Repo | Estado | Qué hace | Instalar |
@@ -117,7 +154,7 @@ Son skills «antislop»: dan criterio de dirección de arte para que las webs no
 | `frontend-slides` | [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) · MIT · ★ 32 k | Solo ideas | Presentaciones web con las skills de frontend del agente. |
 | `html-ppt` | [lewislulu/html-ppt-skill](https://github.com/lewislulu/html-ppt-skill) · MIT · ★ 9 k | Solo ideas | Estudio de presentaciones HTML: 24 temas, 31 layouts y más de 20 animaciones. |
 | `slidev` | [slidevjs/slidev](https://github.com/slidevjs/slidev/tree/main/skills/slidev) · ★ 49 k | En el radar | La skill oficial de Slidev, presentaciones para desarrolladores escritas en Markdown. |
-| `slideshow` | [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes/tree/main/skills/slideshow) · Apache-2.0 · ★ 80 k | En el radar | Skill de HyperFrames («escribe HTML, renderiza vídeo») para montar pases de diapositivas. |
+| `slideshow` | [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes/tree/main/skills/slideshow) · Apache-2.0 · ★ 82 k | En el radar | Skill de HyperFrames («escribe HTML, renderiza vídeo») para montar pases de diapositivas. |
 | `baoyu-slide-deck` | [JimLiu/baoyu-skills](https://github.com/JimLiu/baoyu-skills/tree/main/skills/baoyu-slide-deck) · MIT · ★ 27 k | En el radar | Genera decks como imágenes, sin texto editable. |
 
 **Mis notas:**
@@ -151,6 +188,18 @@ Son skills «antislop»: dan criterio de dirección de arte para que las webs no
 
 - **Claude Mem:** instala un servicio en segundo plano y hooks. Claude Code ya tiene memoria y `CLAUDE.md`, así que pruébalo solo si echas algo en falta. Se instala con `claude plugin marketplace add thedotmack/claude-mem` y `claude plugin install claude-mem`.
 - **LightRAG:** solo para apps o agentes que respondan sobre una base de documentos. Va en un entorno virtual del proyecto: `pip install "lightrag-hku[api]"`.
+
+## Referencias
+
+Tampoco son skills: son las webs que se le enseñan al agente para que el resultado no salga genérico.
+
+| Web | Enlace | Estado | Qué hace |
+|---|---|---|---|
+| **scrolltide.co** | [scrolltide.co](https://scrolltide.co) | Solo ideas | Más de 600 prompts de diseño y 200 componentes con su código para webs 3D y movidas por scroll. |
+| **scrollshaders.com** | [scrollshaders.com](https://scrollshaders.com) | Solo ideas | 117 shaders animados en 11 estilos. |
+| **backgrounds.supply** | [backgrounds.supply](https://backgrounds.supply) | Solo ideas | Fondos de diseño para no tirar del degradado de siempre. |
+| **cta.gallery** | [cta.gallery](https://cta.gallery) | Solo ideas | Galería de llamadas a la acción para inspirarse. |
+| **styles.refero.design** | [styles.refero.design](https://styles.refero.design) | Solo ideas | Estilos de diseño sacados de productos reales. |
 
 ## Extra · Plantilla de prompt «Misión»
 

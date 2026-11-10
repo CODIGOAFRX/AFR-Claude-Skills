@@ -31,7 +31,9 @@ const nombre = (id: string) => SKILLS.find((s) => s.id === id)?.nombre ?? id;
 const skill = (id: string) => SKILLS.find((s) => s.id === id)!;
 
 // Nombres cortos para el lomo, que solo tiene el ancho de una cinta.
-const CORTO: Record<string, string> = { taste: 'Arte', scroll: 'Scroll', sistema: 'Sistema', pulir: 'Pulir', revisar: 'Revisar', slides: 'Slides', agentes: 'Agentes', memoria: 'Memoria' };
+// Bloques cuyas pistas comparten una sola demo.
+const DEMO_BLOQUE: Record<string, string> = { slides: 'ritmo', motion: 'curvas', video: 'montaje', taller: 'taller', refs: 'referencia' };
+const CORTO: Record<string, string> = { taste: 'Arte', scroll: 'Scroll', sistema: 'Sistema', pulir: 'Pulir', revisar: 'Revisar', slides: 'Slides', motion: 'Motion', video: 'Vídeo', taller: 'Taller', refs: 'Refs', agentes: 'Agentes', memoria: 'Memoria' };
 
 function rec(texto: string, etiqueta: string, cls = '') {
   return `<button class="rec ${cls}" type="button" data-copia="${esc(texto)}"><span class="rec-piloto" aria-hidden="true"></span>${esc(etiqueta)}</button>`;
@@ -88,12 +90,22 @@ function lomo() {
 
 // ——— Bloques: tracklist y pletina
 
+/** El prompt de una pista que no trae uno escrito a mano: instalarla, usarla o tomarla de referencia. */
+function promptDe(s: Skill) {
+  if (s.tipo === 'web') return `Abre ${s.repo} y úsala como referencia para este proyecto: ${s.hace}\nDime qué ideas concretas (composición, movimiento, color) encajan con lo que estamos haciendo antes de tocar nada.`;
+  if (s.tipo === 'herramienta') return `Quiero usar ${s.nombre} (${s.repo}) desde este proyecto. No es una skill: es la herramienta. Comprueba si la tengo instalada, dime qué haría falta para usarla aquí y enséñame un ejemplo mínimo antes de instalar nada.`;
+  return `Instala la skill ${s.nombre} (${s.repo}) solo en este proyecto: lee su README y sigue la instalación que indique para Claude Code; si no trae instalador, copia la carpeta de la skill a .claude/skills.\nAntes dime qué instala y si necesita dependencias o servicios de pago. Después explícame cómo se usa.`;
+}
+
 function fila(s: Skill) {
+  // Las pistas de un pack con comando único (Taste, UI UX Pro Max) se graban con él; el resto lleva su propio botón.
+  const conPack = !s.instalar && !s.prompt && BLOQUES.some((b) => b.id === s.bloque && b.instalar);
   const acciones = [
     s.instalar && rec(s.instalar, 'Grabar comando', 'rec-pequeno'),
     s.prompt && rec(s.prompt, 'Grabar prompt', 'rec-pequeno'),
-    !s.instalar && !s.prompt && `<a class="enlace" href="#b-${s.bloque}">Se graba con el pack del bloque</a>`,
-    `<a class="enlace" href="${s.repo}" target="_blank" rel="noopener noreferrer">Repo ${ICONO.fuera}</a>`,
+    !s.instalar && !s.prompt && !conPack && rec(promptDe(s), 'Grabar prompt', 'rec-pequeno'),
+    conPack && `<a class="enlace" href="#b-${s.bloque}">Se graba con el pack del bloque</a>`,
+    `<a class="enlace" href="${s.repo}" target="_blank" rel="noopener noreferrer">${s.tipo === 'web' ? 'Web' : 'Repo'} ${ICONO.fuera}</a>`,
   ].filter(Boolean).join('');
   return `<li class="pista" id="s-${s.id}" data-id="${s.id}" data-estado="${s.estado}" data-busca="${esc([s.nombre, s.autor, s.hace, s.cuando, ESTADOS[s.estado].nombre].join(' ').toLowerCase())}">
     <button class="pista-boton" type="button" aria-expanded="false" aria-controls="d-${s.id}">
@@ -118,7 +130,9 @@ function bloques() {
       ? `<p class="bloque-pack"><a href="${b.repo.url}" target="_blank" rel="noopener noreferrer">${b.repo.url.replace('https://github.com/', '')} ${ICONO.fuera}</a>
           <span>${b.repo.licencia ? `${esc(b.repo.licencia)} · ` : ''}${estrellas(b.repo.estrellas)}</span>
           ${b.instalar ? rec(b.instalar, 'Grabar el pack entero', 'rec-pequeno') : ''}</p>`
-      : '';
+      : b.prompt
+        ? `<p class="bloque-pack">${rec(b.prompt, 'Grabar el bloque entero', 'rec-pequeno')}</p>`
+        : '';
     return `<section class="bloque" id="b-${b.id}" data-bloque="${b.id}" aria-labelledby="t-${b.id}">
       <header class="bloque-cabeza">
         <h2 id="t-${b.id}">${esc(b.nombre)}</h2>
@@ -201,8 +215,10 @@ function pletina(bloque: Bloque) {
 
   play.addEventListener('click', () => (sonando ? para() : suena()));
   cinta.addEventListener('input', () => {
+    // Se lee antes de parar: `para` repinta la cinta con la posición vieja.
+    const nueva = +cinta.value / 1000;
     para();
-    p = +cinta.value / 1000;
+    p = nueva;
     if (actual) posicion(actual, p);
     pinta();
   });
@@ -222,7 +238,7 @@ function pletina(bloque: Bloque) {
   const elige = (s: Skill) => {
     para();
     if (actual && modo === 'bucle') pausaBucle(actual, false);
-    const demo = s.bloque === 'slides' ? 'ritmo' : s.compacta ? '' : s.id;
+    const demo = DEMO_BLOQUE[s.bloque] ?? (s.compacta ? '' : s.id);
     $('.pletina-num', deck).textContent = num(s.id);
     $('.pletina-nombre', deck).textContent = s.nombre;
     escenas.querySelectorAll<HTMLElement>('.escena').forEach((e) => (e.hidden = true));

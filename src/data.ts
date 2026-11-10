@@ -1,7 +1,7 @@
 // El catálogo entero. Añadir una skill nueva es añadir una entrada aquí y, si se quiere, su demo en demos.ts.
 // Las descripciones son mías; las estrellas son las de GitHub el día de `REVISADO`.
 
-export const REVISADO = '7 nov 2026';
+export const REVISADO = '10 nov 2026';
 
 export type Estado = 'global' | 'proyecto' | 'opcional' | 'ideas' | 'radar';
 
@@ -19,6 +19,8 @@ export interface Bloque {
   lema: string;
   repo?: { url: string; estrellas: string; licencia?: string };
   instalar?: string;
+  /** Prompt que graba el bloque entero cuando no hay un único comando de pack. */
+  prompt?: string;
 }
 
 export interface Skill {
@@ -37,10 +39,30 @@ export interface Skill {
   prompt?: string;
   /** Sin demo propia: se pinta como ficha compacta. */
   compacta?: boolean;
+  /** Lo que no es una skill: un programa o librería que el agente maneja, o una web de referencia. */
+  tipo?: 'herramienta' | 'web';
 }
 
 const TASTE = 'https://github.com/Leonxlnx/taste-skill';
 const UIPRO = 'https://github.com/nextlevelbuilder/ui-ux-pro-max-skill';
+const EMIL = 'https://github.com/emilkowalski/skills';
+const TRANSITIONS = 'https://github.com/Jakubantalik/transitions.dev';
+const HYPERFRAMES = 'https://github.com/heygen-com/hyperframes';
+
+/** Una skill del pack de Emil Kowalski: todas comparten repo y se instalan sueltas con --skill. */
+const emil = (id: string, hace: string, cuando?: string): Skill => ({
+  id, nombre: id, bloque: 'motion', autor: 'Emil Kowalski', repo: `${EMIL}/tree/main/skills/${id}`, estrellas: '56 k', licencia: 'MIT', estado: 'radar', compacta: true,
+  hace, cuando, instalar: `npx skills@latest add emilkowalski/skills --skill ${id}`,
+});
+
+/** Una pista en el radar, sin demo propia: su botón graba un prompt genérico de instalación. */
+const radar = (bloque: string, id: string, nombre: string, autor: string, repo: string, estrellas: string | undefined, licencia: string | undefined, hace: string, extra: Partial<Skill> = {}): Skill => ({
+  id, nombre, bloque, autor, repo: repo.startsWith('http') ? repo : `https://github.com/${repo}`, estrellas, licencia, estado: 'radar', compacta: true, hace, ...extra,
+});
+const util = (id: string, nombre: string, autor: string, repo: string, estrellas: string, licencia: string | undefined, hace: string) =>
+  radar('taller', id, nombre, autor, repo, estrellas, licencia, hace, { tipo: 'herramienta' });
+const web = (id: string, url: string, hace: string) =>
+  radar('refs', id, url, 'Web', `https://${url}`, undefined, undefined, hace, { tipo: 'web', estado: 'ideas' });
 
 export const BLOQUES: Bloque[] = [
   {
@@ -63,14 +85,49 @@ export const BLOQUES: Bloque[] = [
     instalar: 'npx -y ui-ux-pro-max-cli init --ai claude --global',
   },
   { id: 'pulir', nombre: 'Pulir y copiar estilos', lema: 'Para dejar un diseño fino o partir del estilo de una marca o de una web que te guste.' },
+  {
+    id: 'motion',
+    nombre: 'Animación de interfaz',
+    lema: 'El pack de Emil Kowalski y la skill de transitions.dev: que el agente elija bien la curva, la duración y qué no animar.',
+    repo: { url: EMIL, estrellas: '56 k', licencia: 'MIT' },
+    instalar: 'npx skills@latest add emilkowalski/skills',
+  },
   { id: 'revisar', nombre: 'Revisar, probar y ordenar', lema: 'Auditar la interfaz, abrirla en un navegador de verdad, desenredar el código y buscar la skill que falta.' },
   {
     id: 'slides',
     nombre: 'Presentaciones',
     lema: 'Las que he mirado para hacer decks. Ninguna construye los míos: todas generan HTML o imágenes, así que me quedo con sus ideas de ritmo.',
+    prompt: `Instala solo en este proyecto las skills de presentaciones que uso de referencia. Para cada una, lee su README y sigue la instalación que indique para Claude Code; si no trae instalador, copia la carpeta de la skill a .claude/skills.
+- frontend-slides | https://github.com/zarazhangrui/frontend-slides
+- html-ppt | https://github.com/lewislulu/html-ppt-skill
+- slidev | https://github.com/slidevjs/slidev/tree/main/skills/slidev
+- slideshow (HyperFrames) | https://github.com/heygen-com/hyperframes/tree/main/skills/slideshow
+- baoyu-slide-deck | https://github.com/JimLiu/baoyu-skills/tree/main/skills/baoyu-slide-deck
+Antes de instalar dime qué añade cada una y si alguna pide dependencias o servicios de pago. Al acabar, dame una tabla: skill | instalada sí/no | ruta | cuándo usarla.`,
+  },
+  {
+    id: 'video',
+    nombre: 'Vídeo: guion, efectos y sonido',
+    lema: 'Un equipo de vídeo dentro de Claude Code: montaje con HTML o React, storyboard, efectos y banda sonora.',
+    prompt: `Quiero montar vídeo desde Claude Code. Instala solo en este proyecto estas skills, leyendo el README de cada una y siguiendo su instalación para Claude Code:
+- HyperFrames | https://github.com/heygen-com/hyperframes
+  claude plugin marketplace add heygen-com/hyperframes y claude plugin install hyperframes@hyperframes --scope project
+- Remotion skills | https://github.com/remotion-dev/skills
+- DirectorSKILL | https://github.com/wuwangzhang1216/DirectorSKILL
+- pixelfx | https://github.com/patch-gg/pixelfx
+- shader-skills | https://github.com/gokayfem/shader-skills
+- ElevenLabs skills | https://github.com/elevenlabs/skills
+Las de ElevenLabs necesitan API key y cuenta: pídemela cuando toque y no generes nada de pago sin preguntarme.
+Antes de instalar dime qué añade cada una. Al acabar, dame una tabla: skill | instalada sí/no | ruta | cuándo usarla.`,
+  },
+  {
+    id: 'taller',
+    nombre: 'Taller de motion',
+    lema: 'No son skills: son los veinte programas y librerías abiertos que un agente puede manejar para animar, simular, sonorizar y exportar.',
   },
   { id: 'agentes', nombre: 'Agentes y automatización', lema: 'Especialistas a los que delegar, workflows de n8n y el paquete gordo, con cuidado.' },
   { id: 'memoria', nombre: 'Memoria y conocimiento', lema: 'Que Claude recuerde entre sesiones y que una app responda sobre tus documentos.' },
+  { id: 'refs', nombre: 'Referencias', lema: 'Tampoco son skills: son las webs que se le enseñan al agente para que el resultado no salga genérico.' },
 ];
 
 export const SKILLS: Skill[] = [
@@ -209,6 +266,32 @@ export const SKILLS: Skill[] = [
     prompt: 'Usa SkillUI (npm "skillui", repo https://github.com/amaancoderx/npxskillui) para extraer\nel sistema de diseño de [URL]. Instálalo si hace falta, genera la skill y colócala en\n.claude/skills de este proyecto para que la uses al diseñar.',
   },
 
+  // ——— Animación de interfaz · Emil Kowalski y transitions.dev
+  emil('emil-design-eng', 'La principal del pack: sobre todo animación, con algo de criterio de diseño. Recoge los fallos pequeños que cometen los agentes y cómo se arreglan.', 'Como base en cualquier interfaz que se mueva.'),
+  emil('animate', 'Construye una animación desde cero eligiendo bien la curva, la duración y las propiedades.', 'Cuando hace falta una animación nueva y no quieres un ease-in donde iba un ease-out.'),
+  emil('review-animations', 'Revisa tus animaciones con las reglas de Emil, sin contemplaciones.', 'Antes de dar por buena una interacción.'),
+  emil('improve-animations', 'Audita todas las animaciones del código y devuelve planes priorizados que cualquier agente puede ejecutar por separado.'),
+  emil('find-animation-opportunities', 'Busca en la interfaz los sitios donde el movimiento aportaría de verdad y avisa de lo que no conviene animar.'),
+  emil('remove-animations', 'Lo contrario: quita las animaciones que sobran, como el fundido en cada sección o el retardo en cada tooltip.'),
+  emil('choreograph', 'Coordina varios elementos que se mueven a la vez: quién entra primero, quién le sigue, qué va en paralelo y qué se queda quieto.'),
+  emil('animation-performance', 'Arregla las animaciones que pierden fotogramas, con los problemas finos que los agentes suelen pasar por alto.'),
+  emil('animation-vocabulary', 'El vocabulario para pedirle a una IA la animación exacta que quieres.'),
+  emil('apple-design', 'Los principios de Apple sobre interfaz y movimiento fluido, sacados de sus charlas de la WWDC y llevados a la web.'),
+  emil('gestures', 'Arrastres, deslizamientos y hojas que siguen al dedo, conservan la velocidad al soltar y se pueden atrapar a mitad de animación.'),
+  emil('prototype', 'Construye varias versiones de una pieza de interfaz y te deja pasar de una a otra con un selector.'),
+  emil('mobile-native', 'Hace que una web se sienta nativa en el móvil: hover pegajoso, el fallo de 100vh, inputs que hacen zoom, zonas seguras y demás.'),
+  emil('break-ui', 'Intenta romper tu interfaz con los peores datos: nombres larguísimos, listas vacías, cifras enormes.'),
+  emil('pick-ui-library', 'Elige la librería adecuada para cada tarea entre las que Emil usa, en vez de dejar que la IA escriba un toast a mano.'),
+  emil('animate-expo', 'El mismo listón que animate, para React Native y Expo: gestos, hojas, hápticos y transiciones de pantalla.'),
+  emil('write-swift', 'Swift moderno: tipos por valor, concurrencia de Swift 6, genéricos, rendimiento y Swift Testing.'),
+  emil('ask-sonner', 'La guía de Sonner, la librería de toasts de Emil: montaje, estilos, recetas y arreglos de los problemas habituales.'),
+  radar('motion', 'transitions-dev', 'transitions.dev', 'Jakub Antalik', TRANSITIONS, '6,2 k', undefined,
+    'Enseña al agente movimiento de producto: una biblioteca de más de 27 transiciones listas para producción y comandos para listarlas, revisar el proyecto, aplicarlas y pasar las duraciones sueltas a tokens.',
+    { cuando: 'Menús, modales, cambios de icono: las transiciones de siempre, bien hechas. Su galería de la comunidad sirve de inspiración.', ojo: 'Las transiciones Pro son de pago; la skill principal y la de pulido son gratis.', instalar: 'npx skills add Jakubantalik/transitions.dev' }),
+  radar('motion', 'transitions-polish', 'transitions-polish', 'Jakub Antalik', TRANSITIONS, '6,2 k', undefined,
+    'El complemento de pulido: alinea el movimiento que ya tienes con la escala de tokens de transitions.dev (abrir y cerrar, hover, escalonados y distancias). Solo informa, no edita.',
+    { instalar: 'npx skills add Jakubantalik/transitions.dev -s transitions-polish' }),
+
   // ——— Revisar, probar y encontrar
   {
     id: 'web-design-guidelines', nombre: 'web-design-guidelines', bloque: 'revisar', autor: 'Vercel', repo: 'https://github.com/vercel-labs/agent-skills', estrellas: '34 k', estado: 'global',
@@ -249,13 +332,51 @@ export const SKILLS: Skill[] = [
     hace: 'La skill oficial de Slidev: presentaciones para desarrolladores escritas en Markdown. Genera HTML.',
   },
   {
-    id: 'slideshow', nombre: 'slideshow', bloque: 'slides', autor: 'HyperFrames · HeyGen', repo: 'https://github.com/heygen-com/hyperframes/tree/main/skills/slideshow', estrellas: '80 k', licencia: 'Apache-2.0', estado: 'radar', compacta: true,
+    id: 'slideshow', nombre: 'slideshow', bloque: 'slides', autor: 'HyperFrames · HeyGen', repo: 'https://github.com/heygen-com/hyperframes/tree/main/skills/slideshow', estrellas: '82 k', licencia: 'Apache-2.0', estado: 'radar', compacta: true,
     hace: 'Pases de diapositivas con HyperFrames, que escribe HTML y lo renderiza a vídeo. Genera HTML.',
   },
   {
     id: 'baoyu-slide-deck', nombre: 'baoyu-slide-deck', bloque: 'slides', autor: 'Jim Liu', repo: 'https://github.com/JimLiu/baoyu-skills/tree/main/skills/baoyu-slide-deck', estrellas: '27 k', licencia: 'MIT', estado: 'radar', compacta: true,
     hace: 'Genera decks como imágenes. Quedan bonitos, pero sin texto editable.',
   },
+
+  // ——— Vídeo: guion, efectos y sonido
+  radar('video', 'hyperframes', 'HyperFrames', 'HeyGen', HYPERFRAMES, '82 k', 'Apache-2.0',
+    'Escribes HTML y sale un vídeo: convierte HTML, CSS, medios y animaciones en MP4 deterministas, pensado para que lo maneje un agente. Trae skills para la CLI, el catálogo de bloques, medios, Figma, pasar de Remotion y pases de diapositivas.',
+    { cuando: 'Vídeos de producto, explicativos o para redes hechos con lo que ya sabes de web.', ojo: 'Pide Node 22 o superior. El framework y la app Studio son gratis; el plan Pro añade los modelos de vídeo, voz y música de HeyGen.', instalar: 'claude plugin marketplace add heygen-com/hyperframes\nclaude plugin install hyperframes@hyperframes' }),
+  radar('video', 'remotion-skills', 'Remotion skills', 'Remotion', 'remotion-dev/skills', '6,8 k', undefined, 'Las skills oficiales de Remotion: Claude monta vídeos de verdad escribiendo componentes de React.', { ojo: 'Remotion tiene licencia propia: es gratis para particulares y equipos pequeños, de pago para empresas.' }),
+  radar('video', 'claude-animated-shorts', 'claude-animated-shorts', 'mromidev', 'mromidev/claude-animated-shorts', '2,7 k', 'MIT', 'Cortos animados para redes con three.js: personajes en 2D dentro de un mundo en 3D.'),
+  radar('video', 'director-skill', 'DirectorSKILL', 'wuwangzhang1216', 'wuwangzhang1216/DirectorSKILL', '340', 'MIT', 'Dirección de cine con IA: le das el guion y devuelve la lista de planos y los prompts de fotograma clave y de vídeo.'),
+  radar('video', 'drama-skills', 'drama-skills', 'zenstory-ai', 'zenstory-ai/drama-skills', '4 k', 'MIT', 'De una idea a una serie corta: adapta novelas a guion y saca fichas de personaje, storyboards y prompts de imagen y vídeo.', { ojo: 'La documentación está sobre todo en chino.' }),
+  radar('video', 'seedance-storyboard', 'Seedance2 Storyboard', 'liangdabiao', 'liangdabiao/Seedance2-Storyboard-Generator', '2,8 k', undefined, 'Convierte una historia en storyboards y en planos con prompts estructurados para Seedance 2.0.', { ojo: 'Sin licencia declarada y documentada en chino. Seedance es un modelo de pago.' }),
+  radar('video', 'pixelfx', 'pixelfx', 'patch-gg', 'patch-gg/pixelfx', '6,5 k', 'MIT', '244 efectos de pixel art, cada uno un trozo pequeño de código, y una skill para que Claude invente más.'),
+  radar('video', 'shader-skills', 'shader-skills', 'gokayfem', 'gokayfem/shader-skills', '434', 'MIT', 'Shaders GLSL y de Shadertoy: 186 funciones, raymarching con SDF, agua y nubes.'),
+  radar('video', 'webgpu-claude-skill', 'webgpu-claude-skill', 'Daniel Greenheck', 'dgreenheck/webgpu-claude-skill', '1,3 k', undefined, 'Para desarrollar con WebGPU en three.js: TSL y partículas por compute shader.'),
+  radar('video', 'comfyui-mcp', 'comfyui-mcp', 'artokun', 'artokun/comfyui-mcp', '906', 'MIT', 'Un servidor MCP con el que Claude construye y ejecuta tu grafo de ComfyUI para generar imagen y vídeo en local.', { ojo: 'Necesita ComfyUI instalado y una gráfica que lo mueva.' }),
+  radar('video', 'elevenlabs-skills', 'ElevenLabs skills', 'ElevenLabs', 'elevenlabs/skills', '547', 'MIT', 'Las skills oficiales de ElevenLabs: efectos de sonido, música y voces.', { ojo: 'Necesita cuenta y API key de ElevenLabs, que es de pago por uso.' }),
+  radar('video', 'claude-ai-music-skills', 'claude-ai-music-skills', 'bitwize-music-studio', 'bitwize-music-studio/claude-ai-music-skills', '648', 'CC0-1.0', 'Un flujo completo para producir un álbum con Suno: skills, plantillas y herramientas.', { ojo: 'Suno es un servicio de pago.' }),
+
+  // ——— Taller de motion: programas y librerías, no skills
+  util('remotion', 'Remotion', 'Remotion', 'remotion-dev/remotion', '72 k', undefined, 'Motor de vídeo en React: el vídeo se programa con componentes.'),
+  util('animejs', 'Anime.js', 'Julian Garnier', 'juliangarnier/anime', '74 k', 'MIT', 'Motor de animación en JavaScript: líneas de tiempo, curvas y coreografía.'),
+  util('glaxnimate', 'Glaxnimate', 'KDE', 'KDE/glaxnimate', '44', undefined, 'Programa de animación vectorial con fotogramas clave.'),
+  util('curtainsjs', 'Curtains.js', 'Martin Laxenaire', 'martinlaxenaire/curtainsjs', '1,8 k', 'MIT', 'Convierte imágenes y vídeos del DOM en planos WebGL para deformarlos con shaders.'),
+  util('vfx-js', 'VFX-JS', 'fand', 'fand/vfx-js', '1,2 k', 'MIT', 'Efectos WebGL sobre elementos de la página: glitch, bloom y píxel.'),
+  util('threejs', 'Three.js', 'mrdoob', 'mrdoob/three.js', '118 k', 'MIT', 'La librería 3D de la web: escenas, luces y cámaras.'),
+  util('blender', 'Blender', 'Blender Foundation', 'blender/blender', '22 k', undefined, 'Modelado, rigging y render de cine. El repo de GitHub es un espejo del oficial.'),
+  util('uikit', 'UIKit', 'pmndrs', 'pmndrs/uikit', '3,3 k', undefined, 'Interfaces construidas dentro de escenas 3D con react-three-fiber.'),
+  util('gaussian-splats-3d', 'GaussianSplats3D', 'Mark Kellogg', 'mkkellogg/GaussianSplats3D', '2,9 k', 'MIT', 'Render de gaussian splats en Three.js.'),
+  util('nvidia-warp', 'NVIDIA Warp', 'NVIDIA', 'NVIDIA/warp', '7,3 k', 'Apache-2.0', 'Framework de Python para simulación física acelerada por GPU.'),
+  util('origami-simulator', 'Origami Simulator', 'Amanda Ghassaei', 'amandaghassaei/OrigamiSimulator', '1,4 k', 'MIT', 'Simulador de plegado de papel en WebGL, en tiempo real.'),
+  util('materialx', 'MaterialX', 'Academy Software Foundation', 'AcademySoftwareFoundation/MaterialX', '2,3 k', 'Apache-2.0', 'Estándar abierto para materiales procedurales y grafos de shader.'),
+  util('alembic', 'Alembic', 'Alembic', 'alembic/alembic', '1,2 k', undefined, 'Formato para guardar y compartir geometría animada entre programas.'),
+  util('comfyui', 'ComfyUI', 'Comfy Org', 'Comfy-Org/ComfyUI', '146 k', 'GPL-3.0', 'Generación de imagen y vídeo con modelos de difusión, montada con nodos.'),
+  util('lmms', 'LMMS', 'LMMS', 'LMMS/lmms', '11 k', 'GPL-2.0', 'Producción musical: ritmos, sintetizadores y banda sonora.'),
+  util('essentia', 'Essentia', 'MTG · UPF', 'MTG/essentia', '3,8 k', 'AGPL-3.0', 'Análisis de audio y música, en C++ con bindings de Python.'),
+  util('wavesurfer', 'WaveSurfer.js', 'katspaugh', 'katspaugh/wavesurfer.js', '10 k', 'BSD-3-Clause', 'Reproductor con forma de onda interactiva para la web.'),
+  util('obs-studio', 'OBS Studio', 'OBS Project', 'obsproject/obs-studio', '79 k', 'GPL-2.0', 'Captura y grabación de pantalla.'),
+  util('opentimelineio', 'OpenTimelineIO', 'Academy Software Foundation', 'AcademySoftwareFoundation/OpenTimelineIO', '2,1 k', 'Apache-2.0', 'Formato de intercambio para mover líneas de tiempo de montaje entre herramientas.'),
+  util('ffmpeg', 'FFmpeg', 'FFmpeg', 'FFmpeg/FFmpeg', '67 k', undefined, 'Codificar, comprimir y entregar. El repo de GitHub es un espejo del oficial.'),
 
   // ——— Agentes y automatización
   {
@@ -294,6 +415,13 @@ export const SKILLS: Skill[] = [
     instalar: 'pip install "lightrag-hku[api]"',
     prompt: 'Quiero usar LightRAG (https://github.com/HKUDS/LightRAG) en este proyecto. Instálalo en un\nentorno virtual de Python dentro del proyecto y explícame cómo conectarlo a mis documentos.',
   },
+
+  // ——— Referencias: webs, no skills
+  web('scrolltide', 'scrolltide.co', 'Más de 600 prompts de diseño y 200 componentes con su código para webs 3D y movidas por scroll.'),
+  web('scrollshaders', 'scrollshaders.com', '117 shaders animados en 11 estilos.'),
+  web('backgrounds-supply', 'backgrounds.supply', 'Fondos de diseño para no tirar del degradado de siempre.'),
+  web('cta-gallery', 'cta.gallery', 'Galería de llamadas a la acción para inspirarse.'),
+  web('refero-styles', 'styles.refero.design', 'Estilos de diseño sacados de productos reales.'),
 ];
 
 // ——— Packs: un prompt que se pega en Claude Code y deja el proyecto listo para trabajar.

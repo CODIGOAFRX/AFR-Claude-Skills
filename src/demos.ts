@@ -619,6 +619,100 @@ const ritmo: Demo = (el) => {
   alScroll(el, (p) => el.style.setProperty('--rt', tramo(p, 0.15, 0.5).toFixed(3)));
 };
 
+// ——— Demos de bloque: una por bloque, compartida por todas sus pistas (como `ritmo`).
+
+/** Animación de interfaz: la misma entrada con la curva equivocada y con la buena. */
+const curvas: Demo = (el) => {
+  el.classList.add('d-curvas');
+  const S = 120;
+  const dentro = (t: number) => t * t * t;
+  const fuera = (t: number) => 1 - (1 - t) ** 3;
+  const trazo = (f: (t: number) => number) => Array.from({ length: 25 }, (_, i) => `${i ? 'L' : 'M'}${((i / 24) * S).toFixed(1)} ${(S - f(i / 24) * S).toFixed(1)}`).join(' ');
+  const carril = (cls: string, nombre: string, nota: string, f: (t: number) => number) => `<div class="cv-carril ${cls}">
+      <svg viewBox="-6 -6 ${S + 12} ${S + 12}" aria-hidden="true"><path class="cv-eje" d="M0 0V${S}H${S}"/><path class="cv-curva" d="${trazo(f)}"/><circle r="5"/></svg>
+      <div><p class="cv-k">${nombre}</p><p class="cv-nota">${nota}</p><div class="cv-pista"><span class="cv-panel">Menú</span></div></div>
+    </div>`;
+  el.innerHTML = carril('cv-mal', 'ease-in · lo que pone el agente', 'Arranca perezoso y llega de golpe.', dentro)
+    + carril('cv-bien', 'ease-out · lo que toca', 'Responde al instante y frena al llegar.', fuera)
+    + '<p class="cv-pie">Misma duración, misma distancia. Solo cambia la curva.</p>';
+  const filas = [...el.querySelectorAll<HTMLElement>('.cv-carril')].map((c, i) => ({ c, f: i ? fuera : dentro, punto: c.querySelector('circle')! }));
+  alScroll(el, (p) => {
+    const t = tramo(p, 0.12, 0.88);
+    filas.forEach(({ c, f, punto }) => {
+      const v = f(t);
+      c.style.setProperty('--v', v.toFixed(3));
+      punto.setAttribute('cx', (t * S).toFixed(1));
+      punto.setAttribute('cy', (S - v * S).toFixed(1));
+    });
+  });
+};
+
+/** Vídeo: una línea de tiempo con sus cuatro pistas y el plano que toca en cada momento. */
+const montaje: Demo = (el) => {
+  el.classList.add('d-montaje');
+  const planos = ['Plano 1 · producto en mesa', 'Plano 2 · manos, detalle', 'Plano 3 · pantalla, zoom', 'Plano 4 · logo y cierre'];
+  // [pista, inicio, fin, nombre]
+  const clips: [number, number, number, string][] = [
+    [0, 0, 0.25, 'plano 1'], [0, 0.25, 0.5, 'plano 2'], [0, 0.5, 0.75, 'plano 3'], [0, 0.75, 1, 'plano 4'],
+    [1, 0, 0.5, 'index.html'], [1, 0.5, 1, 'cierre.html'],
+    [2, 0.2, 0.32, 'glitch'], [2, 0.55, 0.8, 'shader'],
+    [3, 0, 1, 'música'], [3, 0.24, 0.3, 'sfx'], [3, 0.74, 0.8, 'sfx'],
+  ];
+  const pistas = ['Guion', 'Vídeo', 'Efectos', 'Sonido'];
+  el.innerHTML = `<div class="mj-visor"><p class="mj-rec">REC</p><p class="mj-plano"></p><p class="mj-tc"></p></div>
+    <div class="mj-linea">${pistas.map((n, i) => `<div class="mj-pista"><span class="mj-n">${n}</span><div class="mj-clips">${
+      clips.filter((c) => c[0] === i).map(([, a, b, t]) => `<span class="mj-clip" data-a="${a}" data-b="${b}" style="left:${a * 100}%;width:${(b - a) * 100}%">${t}</span>`).join('')}</div></div>`).join('')}
+      <span class="mj-cabezal" aria-hidden="true"></span></div>
+    <p class="mj-pie">Guion, montaje, efectos y sonido: cuatro pistas, un solo agente.</p>`;
+  const plano = el.querySelector<HTMLElement>('.mj-plano')!;
+  const tc = el.querySelector<HTMLElement>('.mj-tc')!;
+  const cs = [...el.querySelectorAll<HTMLElement>('.mj-clip')];
+  alScroll(el, (p) => {
+    el.style.setProperty('--mj', p.toFixed(4));
+    const i = Math.min(3, Math.floor(p * 4));
+    plano.textContent = planos[i];
+    el.dataset.plano = String(i);
+    const f = Math.round(p * 12 * 30);
+    tc.textContent = `00:${String(Math.floor(f / 30)).padStart(2, '0')}:${String(f % 30).padStart(2, '0')}`;
+    cs.forEach((c) => c.classList.toggle('on', p >= +c.dataset.a! && p <= +c.dataset.b!));
+  });
+};
+
+/** Taller de motion: la cadena de la idea al archivo final, con las herramientas de cada puesto. */
+const taller: Demo = (el) => {
+  el.classList.add('d-taller');
+  const puestos: [string, string[]][] = [
+    ['Trazo', ['Glaxnimate', 'UIKit']],
+    ['Movimiento', ['Remotion', 'Anime.js']],
+    ['3D', ['Three.js', 'Blender', 'Warp']],
+    ['Efectos', ['Curtains.js', 'VFX-JS', 'ComfyUI']],
+    ['Sonido', ['LMMS', 'Essentia']],
+    ['Entrega', ['OBS', 'OTIO', 'FFmpeg']],
+  ];
+  el.innerHTML = `<ol class="tl-cadena">${puestos.map(([n, hs], i) => `<li class="tl-puesto"><span class="tl-num">${i + 1}</span><b>${n}</b><span class="tl-herr">${hs.join(' · ')}</span></li>`).join('')}</ol>
+    <div class="tl-barra" aria-hidden="true"><span></span></div>
+    <p class="tl-pie">idea → movimiento → efectos → sonido → corte final</p>`;
+  const lis = [...el.querySelectorAll<HTMLElement>('.tl-puesto')];
+  alScroll(el, (p) => {
+    const t = tramo(p, 0.05, 0.95);
+    el.style.setProperty('--tl', t.toFixed(3));
+    lis.forEach((li, i) => {
+      li.classList.toggle('hecho', t >= (i + 1) / lis.length);
+      li.classList.toggle('ahora', t >= i / lis.length && t < (i + 1) / lis.length);
+    });
+  });
+};
+
+/** Referencias: la misma cabecera sin referencia y después de enseñarle una al agente. */
+const referencia: Demo = (el) => {
+  el.classList.add('d-referencia');
+  el.innerHTML = `<div class="rf-capa rf-generica"><p class="rf-chip">✨ Nuevo</p><p class="rf-h">Impulsa tu negocio con IA</p><p class="rf-p">La plataforma todo en uno para equipos modernos.</p><span class="rf-cta">Empezar gratis</span></div>
+    <div class="rf-capa rf-buena"><p class="rf-chip">N.º 04 — Otoño</p><p class="rf-h">Café tostado<br>el martes,<br>en tu puerta<br>el jueves.</p><span class="rf-cta">Pedir un saco →</span></div>
+    <span class="rf-corte" aria-hidden="true"></span>
+    <p class="rf-etq rf-etq-a">sin referencia</p><p class="rf-etq rf-etq-b">con referencia</p>`;
+  alScroll(el, (p) => el.style.setProperty('--rf', `${(tramo(p, 0.15, 0.85) * 100).toFixed(1)}%`));
+};
+
 // ——— Agentes y automatización
 
 const voltagent: Demo = (el) => {
@@ -753,6 +847,10 @@ export const DEMOS: Record<string, Demo> = {
   'find-skills': findSkills,
   'untangle-codebase': untangle,
   ritmo,
+  curvas,
+  montaje,
+  taller,
+  referencia,
   voltagent,
   'n8n-mcp': n8n,
   ecc,
