@@ -4,7 +4,7 @@ Las skills y herramientas **externas** que uso con Claude Code: las que he insta
 
 Revisado el 10 de noviembre de 2026 contra el disco y contra cada repositorio. Las estrellas son las de GitHub ese día.
 
-**95 entradas en 12 bloques**, más una plantilla de prompt:
+**96 entradas en 12 bloques**, más una plantilla de prompt:
 
 | Bloque | Entradas |
 |---|---|
@@ -13,7 +13,7 @@ Revisado el 10 de noviembre de 2026 contra el disco y contra cada repositorio. L
 | [2. Sistema de diseño · UI UX Pro Max](#2-sistema-de-diseño--ui-ux-pro-max) | 7 |
 | [3. Pulir y copiar estilos](#3-pulir-y-copiar-estilos) | 3 |
 | Animación de interfaz | 20 |
-| [4. Revisar, probar y ordenar](#4-revisar-probar-y-ordenar) | 4 |
+| [4. Revisar, probar y ordenar](#4-revisar-probar-y-ordenar) | 5 |
 | [5. Presentaciones](#5-presentaciones) | 5 |
 | Vídeo: guion, efectos y sonido | 12 |
 | Taller de motion | 20 |
@@ -143,6 +143,7 @@ npx skills@latest add emilkowalski/skills
 | Skill | Repo | Estado | Qué hace | Instalar |
 |---|---|---|---|---|
 | `web-design-guidelines` | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) · ★ 34 k | Global | Audita la interfaz contra las Web Interface Guidelines de Vercel (pide «revisa mi UI»). | `npx -y skills add vercel-labs/agent-skills --skill web-design-guidelines -g -a claude-code -y` |
+| `modern-web-guidance` | [GoogleChrome/modern-web-guidance](https://github.com/GoogleChrome/modern-web-guidance) · Apache-2.0 · ★ 4,8 k | Por proyecto | Unas 200 guías de la plataforma web (CSS, HTML, accesibilidad, rendimiento, formularios, seguridad) con datos de compatibilidad, para que el agente use lo que el navegador ya trae y no patrones viejos. | `npx -y skills add GoogleChrome/modern-web-guidance -a claude-code -y` |
 | `playwright-cli` | [microsoft/playwright-cli](https://github.com/microsoft/playwright-cli) · Apache-2.0 · ★ 15 k | Global | Claude abre tu web, la recorre, hace capturas y genera tests de Playwright. | `npm install -g @playwright/cli@latest` y, desde tu carpeta de usuario, `playwright-cli install --skills --global` |
 | `find-skills` | [vercel-labs/skills](https://github.com/vercel-labs/skills) · MIT · ★ 38 k | Global | Busca e instala skills cuando preguntas «¿hay alguna skill que haga X?». | `npx skills add vercel-labs/skills --skill find-skills` |
 | `untangle-codebase` | [caldoai/skills](https://github.com/caldoai/skills/blob/main/skills/untangle-codebase/SKILL.md) · MIT · ★ 738 | Por proyecto | Refactoriza todo el código de una pasada preguntando «¿estas piezas deberían cambiar juntas?»: apunta vínculos ocultos, vínculos innecesarios y código sobrante, y luego los deshace. Se lanza a mano con `/untangle-codebase`. | `npx -y skills add caldoai/skills -a claude-code -y` (todas las de Caldo AI) |
@@ -220,7 +221,7 @@ Al final de la landing hay tres botones. Cada uno copia un prompt que se pega en
 - **Pack web.** Instala, sin duplicar nada:
   - **Diseño:** Taste Skill, UI UX Pro Max, Impeccable, scroll-world, Awesome Design MD o SkillUI (pregunta antes).
   - **Movimiento:** `emil-design-eng`, `review-animations` y `break-ui`, de Emil Kowalski (solo esas tres).
-  - **Revisión y pruebas:** web-design-guidelines, playwright-cli y find-skills.
+  - **Revisión y pruebas:** web-design-guidelines, modern-web-guidance, playwright-cli y find-skills.
   - **Lo demás:** los subagentes frontend de VoltAgent, las skills de Caldo AI y Claude Mem.
 
   Después escribe el CLAUDE.md y te recuerda lanzar `/impeccable init`.

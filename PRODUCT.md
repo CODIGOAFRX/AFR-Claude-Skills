@@ -31,7 +31,7 @@ Lo que otros directorios de skills no pueden copiar: es la selección personal d
 
 ## Capabilities and Constraints
 
-- **Contenido:** 95 entradas en 12 bloques, buscador, filtro por estado, un bloque de packs y la plantilla de prompt «Misión».
+- **Contenido:** 96 entradas en 12 bloques, buscador, filtro por estado, un bloque de packs y la plantilla de prompt «Misión».
 - **Técnica:** sitio estático con Vite y TypeScript, sin framework, desplegado como Worker de Cloudflare en `pedrogomez.dev/proyecto/skills`. Repo público CODIGOAFRX/AFR-Claude-Skills.
 - **Copy:** en español, con descripciones escritas con palabras propias, nunca copiadas de los repos. El idioma para un público internacional queda sin decidir.
 - **Datos:** las estrellas son fotos fechadas (revisado el 7 nov 2026), no datos en vivo.

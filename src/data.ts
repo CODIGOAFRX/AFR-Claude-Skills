@@ -300,6 +300,13 @@ export const SKILLS: Skill[] = [
     instalar: 'npx -y skills add vercel-labs/agent-skills --skill web-design-guidelines -g -a claude-code -y',
   },
   {
+    id: 'modern-web-guidance', nombre: 'modern-web-guidance', bloque: 'revisar', autor: 'Google Chrome', repo: 'https://github.com/GoogleChrome/modern-web-guidance', estrellas: '4,8 k', licencia: 'Apache-2.0', estado: 'proyecto', compacta: true,
+    hace: 'Pone al día al agente con la plataforma web: unas 200 guías sobre CSS, HTML, accesibilidad, rendimiento, formularios y seguridad, con datos de compatibilidad entre navegadores. Antes de escribir, busca la guía que toca y deja de tirar de patrones viejos.',
+    cuando: 'En cualquier frontend, para que use lo que el navegador ya trae (dialog, popover, anclajes de CSS) antes que una librería. También revisa un proyecto en busca de código anticuado.',
+    ojo: 'Las guías se bajan con npx cada vez que el agente las consulta. La cuidan los equipos de Chrome, Edge, Firefox y MDN.',
+    instalar: 'npx -y skills add GoogleChrome/modern-web-guidance -a claude-code -y',
+  },
+  {
     id: 'playwright-cli', nombre: 'playwright-cli', bloque: 'revisar', autor: 'Microsoft', repo: 'https://github.com/microsoft/playwright-cli', estrellas: '15 k', licencia: 'Apache-2.0', estado: 'global',
     hace: 'Claude abre tu web en un navegador real, la recorre, rellena formularios, hace capturas y escribe los tests de Playwright.',
     cuando: 'Para comprobar que algo funciona de verdad, no solo que compila.',
@@ -452,7 +459,7 @@ export const PACKS: Pack[] = [
     id: 'web',
     nombre: 'Pack web',
     para: 'Webs, landings y cualquier frontend: diseño, scroll, subagentes, revisión, memoria y código limpio.',
-    incluye: ['design-taste-frontend', 'gpt-taste', 'ui-ux-pro-max', 'impeccable', 'scroll-world', 'awesome-design-md', 'skillui', 'emil-design-eng', 'review-animations', 'break-ui', 'web-design-guidelines', 'playwright-cli', 'find-skills', 'voltagent', 'untangle-codebase', 'claude-mem'],
+    incluye: ['design-taste-frontend', 'gpt-taste', 'ui-ux-pro-max', 'impeccable', 'scroll-world', 'awesome-design-md', 'skillui', 'emil-design-eng', 'review-animations', 'break-ui', 'web-design-guidelines', 'modern-web-guidance', 'playwright-cli', 'find-skills', 'voltagent', 'untangle-codebase', 'claude-mem'],
     nota: 'Al reiniciar Claude Code, lanza /impeccable init y a trabajar.',
     prompt: `Hola Claude. Deja este proyecto listo para hacer webs con mis skills. Hazlo todo tú, sin preguntarme salvo donde lo indico o si algo falla.
 
@@ -480,6 +487,9 @@ ${CALDO}
 - Tres skills de Emil Kowalski, solo esas tres | https://github.com/emilkowalski/skills
   npx -y skills@latest add emilkowalski/skills --skill emil-design-eng review-animations break-ui -a claude-code -y
   emil-design-eng para animar con criterio, review-animations para revisar el movimiento y break-ui para probar la interfaz con datos feos.
+- Modern Web Guidance | https://github.com/GoogleChrome/modern-web-guidance
+  npx -y skills add GoogleChrome/modern-web-guidance -a claude-code -y
+  Guías de Chrome, Edge, Firefox y MDN: consúltalas antes de escribir HTML, CSS o JavaScript de interfaz.
 - scroll-world | https://github.com/oso95/scroll-world
   claude plugin marketplace add oso95/scroll-world
   claude plugin install scroll-world@scroll-world --scope project
